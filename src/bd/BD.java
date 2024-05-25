@@ -14,11 +14,11 @@ public class BD {
 	
 	private final String DRIVER = 
 			"com.microsoft.sqlserver.jdbc.SQLServerDriver";
-	private final String DATABASENAME = "java";
+	private final String DATABASENAME = "BdNetuno";
 	private final String URL = 
-		"jdbc:sqlserver://192.168.56.1:1433;databasename="+DATABASENAME;
-	private final String LOGIN = "root";
-	private final String SENHA = "root";
+		"jdbc:sqlserver://localhost:1433;databasename="+DATABASENAME;
+	private final String LOGIN = "pedroX"; //MUDAR PARA LOGIN E SENHA
+	private final String SENHA = "";
 	
 	
 	/**
@@ -39,8 +39,7 @@ public class BD {
 		catch(ClassNotFoundException erro) {
 			System.out.println("Driver não encontrado!");
 			return false;
-		}
-		
+		}	
 	}
 
 	/**
@@ -63,7 +62,6 @@ public class BD {
 			}
 		}
 		catch(SQLException e) {}
-
 	}
 	
 	public static void main(String[] args) {

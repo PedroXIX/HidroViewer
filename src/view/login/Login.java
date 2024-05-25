@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
-import view.main.Main;
+import controllers.LoginController;
 
 public class Login extends JPanel {
 
@@ -18,7 +18,7 @@ public class Login extends JPanel {
 
     private void init() {
         setLayout(new MigLayout("fill,insets 20", "[center]", "[center]"));
-        txtUsername = new JTextField();
+        txtCpf = new JTextField();
         txtPassword = new JPasswordField();
         chRememberMe = new JCheckBox("Remember me");
         cmdLogin = new JButton("Login");
@@ -40,9 +40,10 @@ public class Login extends JPanel {
 
         cmdLogin.addActionListener((e) -> {
             //  Do action login here
-            Main.main.showMainForm();
+            LoginController lc = new LoginController();
+            lc.logar(txtCpf.getText(), String.valueOf(txtPassword.getPassword()));
         });
-        txtUsername.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your username or email");
+        txtCpf.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your username or email");
         txtPassword.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your password");
 
         JLabel lbTitle = new JLabel("Welcome back!");
@@ -56,7 +57,7 @@ public class Login extends JPanel {
         panel.add(lbTitle);
         panel.add(description);
         panel.add(new JLabel("Username"), "gapy 8");
-        panel.add(txtUsername);
+        panel.add(txtCpf);
         panel.add(new JLabel("Password"), "gapy 8");
         panel.add(txtPassword);
         panel.add(chRememberMe, "grow 0");
@@ -64,7 +65,7 @@ public class Login extends JPanel {
         add(panel);
     }
 
-    private JTextField txtUsername;
+    private JTextField txtCpf;
     private JPasswordField txtPassword;
     private JCheckBox chRememberMe;
     private JButton cmdLogin;

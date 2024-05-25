@@ -1,10 +1,11 @@
-package view.main;
+package application.main;
 
 import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import java.awt.Font;
 import javax.swing.UIManager;
+import models.FuncionarioModel;
 import raven.drawer.Drawer;
 import view.drawer.MyDrawerBuilder;
 import view.login.Login;
@@ -20,7 +21,16 @@ public class Main extends javax.swing.JFrame {
 
     public static Main main;
     private Login loginForm;
+    public static FuncionarioModel funcionario = new FuncionarioModel();
 
+    public static void setFuncionario(FuncionarioModel funcionario) {
+        Main.funcionario = funcionario;
+    }
+
+    public static FuncionarioModel getFuncionario() {
+        return funcionario;
+    }
+    
     /**
      * Creates new form Main
      */
@@ -56,6 +66,7 @@ public class Main extends javax.swing.JFrame {
         setContentPane(body);
         revalidate();
         repaint();
+        Notifications.getInstance().show(Notifications.Type.INFO, "Olá! "+ funcionario.getNomeFuncionario());
     }
 
     @SuppressWarnings("unchecked")
