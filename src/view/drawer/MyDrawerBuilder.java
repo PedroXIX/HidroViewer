@@ -9,7 +9,8 @@ import raven.drawer.component.menu.MenuValidation;
 import raven.drawer.component.menu.SimpleMenuOption;
 import view.form.ConsumoForm;
 import view.form.CadastroForm;
-import view.main.Main;
+import application.main.Main;
+import models.FuncionarioModel;
 import raven.swing.AvatarIcon;
 import view.tabbed.WindowsTabbed;
 
@@ -19,12 +20,13 @@ import view.tabbed.WindowsTabbed;
  */
 public class MyDrawerBuilder extends SimpleDrawerBuilder {
 
+    FuncionarioModel funcionario = Main.getFuncionario();
     @Override
     public SimpleHeaderData getSimpleHeaderData() {
         return new SimpleHeaderData()
-                .setIcon(new AvatarIcon(getClass().getResource("/raven/image/profile.png"), 60, 60, 999))
-                .setTitle("Ra Ven")
-                .setDescription("raven@gmail.com");
+                .setIcon(new AvatarIcon(getClass().getResource("/view/image/profile.png"), 60, 60, 999))
+                .setTitle(Main.funcionario.getNomeFuncionario())
+                .setDescription(Main.funcionario.getEmailFuncionario());
     }
 
     @Override
