@@ -16,6 +16,11 @@ import raven.popup.component.PopupController;
  */
 public class LoginController extends BaseController {
     
+    /**
+     * Método de validação que consulta a existência do cadastro no banco de dados
+     * @param cpf - cpf do funcionário
+     * @param senha - senha do funcionário
+     */
     public void logar(String cpf, String senha){
 		if (bd.getConnection()) {
 			String sql = "select*from FUNCIONARIO where CPF_FUNCIONARIO like ?";
@@ -42,7 +47,7 @@ public class LoginController extends BaseController {
                                 }
                                 else
                                 {	                           
-                                    MessageAlerts.getInstance().showMessage("Erro no login","Login ou Senha não correspondendte com a base de dados!", MessageAlerts.MessageType.ERROR, MessageAlerts.CLOSED_OPTION, new PopupCallbackAction() {
+                                    MessageAlerts.getInstance().showMessage("Erro no login","Login ou Senha não correspondente com a base de dados!", MessageAlerts.MessageType.ERROR, MessageAlerts.CLOSED_OPTION, new PopupCallbackAction() {
                                      @Override
                                         public  void action(PopupController pc, int i) {
                                             if (i == MessageAlerts.OK_OPTION) {
