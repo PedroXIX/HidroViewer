@@ -1,5 +1,6 @@
 package view.tabbed;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import javax.swing.JPanel;
 
 /**
@@ -8,6 +9,11 @@ import javax.swing.JPanel;
  */
 public class TabbedForm extends JPanel{
     
+    public void init(){
+            putClientProperty(FlatClientProperties.STYLE, ""
+                + "border:5,5,5,5;"
+                + "background:null");
+    }
     public void formOpen(){
         
     }
