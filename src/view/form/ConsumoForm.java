@@ -164,7 +164,7 @@ public class ConsumoForm extends TabbedForm {
 
     private void applyStyle(JPanel panel) {
         panel.putClientProperty(FlatClientProperties.STYLE, ""
-                + "border:5,5,5,5,$Component.borderColor,,20;"
+                + "border:5,5,5,5,$Component.borderColor;"
                 + "background:$Component.background;"
                 + "font:$Component.font;"
                 + "foreground:$Component.foreground"
