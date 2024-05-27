@@ -1,4 +1,4 @@
-package bd;
+package services;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,8 +17,8 @@ public class BD {
 	private final String DATABASENAME = "BdNetuno";
 	private final String URL = 
 		"jdbc:sqlserver://localhost:1433;databasename="+DATABASENAME;
-	private final String LOGIN = "pedroX"; //MUDAR PARA LOGIN E SENHA
-	private final String SENHA = "";
+	private final String LOGIN = "henrique"; //MUDAR PARA LOGIN E SENHA
+	private final String SENHA = "123";
 	
 	
 	/**

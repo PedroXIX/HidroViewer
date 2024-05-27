@@ -4,7 +4,7 @@
  */
 package controllers;
 
-import bd.BD;
+import services.BD;
 
 /**
  *
