@@ -46,7 +46,8 @@ public class Main extends javax.swing.JFrame {
         Drawer.getInstance().setDrawerBuilder(myDrawerBuilder);
         WindowsTabbed.getInstance().install(this, body);
         // applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        login();
+        //login();
+        showMainForm();
     }
 
     public void login() {
