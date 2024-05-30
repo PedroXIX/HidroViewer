@@ -35,14 +35,14 @@ public class ClienteDAO {
             bd.st = bd.con.prepareStatement(sql);
             bd.st.setInt(1,cliente.getCodCliente());
             bd.st.setString(2,cliente.getCpfCliente());
-            bd.st.setString(3,cliente.getEmailCliente());
-            bd.st.setString(4,cliente.getNomeCliente());
+             bd.st.setString(3,cliente.getNomeCliente());
+            bd.st.setString(4,cliente.getEmailCliente());
             bd.st.setString(5,cliente.getTelefoneCliente());
             bd.st.executeUpdate();
             men = "Cliente com cpf " + cliente.getCpfCliente() + " inserido com sucesso!";
         }
         catch(SQLException e){
-            men = "Falha! Verifique se o cliente já está cadastrado! " + e.toString();
+            men = "Falha! Verifique se o cliente já está cadastrado!  Ou se os dados inseridos estão corretos " + e.toString();
         }
         finally{
             bd.close();
@@ -52,6 +52,7 @@ public class ClienteDAO {
     }
     
     public String atualizar(Cliente cliente){
+        
         sql = "update cliente set cpf_cliente = ?, nome_cliente = ?, email_cliente = ?, telefone_cliente = ? where cod_cliente = ?";
         
         try{
@@ -90,10 +91,10 @@ public class ClienteDAO {
             bd.st.setInt(1,codigo);
             int n = bd.st.executeUpdate();
             if(n == 1){
-                men = "Produto excluído com sucesso!";
+                men = "Cliente excluído com sucesso!";
             }
             else{
-                men = "Produto não encontrado!";
+                men = "Cliente não encontrado!";
             }
             
         }

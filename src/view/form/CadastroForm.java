@@ -99,6 +99,11 @@ public class CadastroForm extends TabbedForm {
         lblTelefone.setText("Telefone");
 
         btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +113,11 @@ public class CadastroForm extends TabbedForm {
         });
 
         btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         tfLocalizar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -119,6 +129,11 @@ public class CadastroForm extends TabbedForm {
         });
 
         atualizarGrade();
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table);
 
         jScrollPane2.setViewportView(jScrollPane1);
@@ -156,9 +171,9 @@ public class CadastroForm extends TabbedForm {
                             .addGap(18, 18, 18)
                             .addComponent(btnExcluir))))
                 .addGap(213, 213, 213)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tfLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addContainerGap(1140, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -168,9 +183,9 @@ public class CadastroForm extends TabbedForm {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tfLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lbCodigo)
                             .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -196,8 +211,10 @@ public class CadastroForm extends TabbedForm {
                             .addComponent(btnSalvar)
                             .addComponent(btnNovo)
                             .addComponent(btnExcluir)))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(83, 83, 83))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(39, 39, 39))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -206,11 +223,29 @@ public class CadastroForm extends TabbedForm {
     }//GEN-LAST:event_tfCodigoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
+        
+        try{
+            c = dao.localizar(Integer.parseInt(tfCodigo.getText()));
+        if(c != null){
+            tfNome.setText(c.getNomeCliente());
+            tfEmail.setText(c.getEmailCliente());
+            tfCpf.setText(c.getCpfCliente());
+            tfTelefone.setText(c.getTelefoneCliente());
+            
+        }
+        else{
+            JOptionPane.showMessageDialog(btnBuscar, "Cliente não encontrado");
+            limparCampos();
+        }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(btnBuscar, "Erro ao consultar cliente: " + e);
+        }
+        
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // TODO add your handling code here:
+        limparCampos();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void tfLocalizarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfLocalizarKeyPressed
@@ -226,6 +261,63 @@ public class CadastroForm extends TabbedForm {
             
         }
     }//GEN-LAST:event_tfLocalizarKeyReleased
+
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+       tfCodigo.setText((String)table.getValueAt(table.getSelectedRow(), 0));
+       tfCpf.setText((String)table.getValueAt(table.getSelectedRow(), 1));
+       tfNome.setText((String)table.getValueAt(table.getSelectedRow(), 2));
+       tfEmail.setText((String)table.getValueAt(table.getSelectedRow(), 3));
+       tfTelefone.setText((String)table.getValueAt(table.getSelectedRow(), 4));
+      
+    }//GEN-LAST:event_tableMouseClicked
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        
+        try{
+            int r = JOptionPane.showConfirmDialog(btnExcluir, "Tem certeza que deseja excluir o cliente selecionado?");
+            if(r==0){
+                JOptionPane.showMessageDialog(btnExcluir,
+                 dao.excluir(Integer.parseInt(tfCodigo.getText())));
+                limparCampos();
+                atualizarGrade();
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(btnExcluir, "Erro ao excluir cliente: " + e);
+        }
+        
+        
+        
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        
+        try{
+        c.setCodCliente(Integer.parseInt(tfCodigo.getText()));
+        c.setEmailCliente(tfEmail.getText());
+        c.setCpfCliente(tfCpf.getText());
+        c.setNomeCliente(tfNome.getText());
+        c.setTelefoneCliente(tfTelefone.getText());
+        
+        if(dao.localizar(c.getCodCliente()) != null){
+            
+            JOptionPane.showMessageDialog(btnSalvar,
+            dao.atualizar(c));
+            limparCampos();
+        } else{
+            JOptionPane.showMessageDialog(btnSalvar,
+            dao.salvar(c));
+            limparCampos();
+        }
+        
+        
+        } catch(Exception e){
+            JOptionPane.showMessageDialog(btnSalvar, "Erro ao salvar novo cliente: " + e);
+        }
+        
+        atualizarGrade();
+        
+    }//GEN-LAST:event_btnSalvarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -254,8 +346,17 @@ public class CadastroForm extends TabbedForm {
         model = MyTableModel.getModel(bd, "select * from cliente");
         table.setModel(model);
         table.getTableHeader().setReorderingAllowed(false);
-        //fazer o ajustar grade é necessário? Definir dps
+     
         
+    }
+
+    private void limparCampos() {
+        tfCodigo.setText("");
+        tfNome.setText("");
+        tfEmail.setText("");
+        tfCpf.setText("");
+        tfTelefone.setText("");
+        tfCodigo.requestFocus();
     }
 
 }
