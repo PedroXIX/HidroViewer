@@ -3,16 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Rique/Documents/GitHub/HidroViewer/src/services/MyTableModel.java</file>
-            <file>file:/C:/Users/Rique/Documents/GitHub/HidroViewer/src/models/FuncionarioModel.java</file>
-            <file>file:/C:/Users/Rique/Documents/GitHub/HidroViewer/src/testes/ClienteLocalizar.java</file>
-            <file>file:/C:/Users/Rique/Documents/GitHub/HidroViewer/src/models/Cliente.java</file>
-            <file>file:/C:/Users/Rique/Documents/GitHub/HidroViewer/src/testes/ClienteInserir.java</file>
-            <file>file:/C:/Users/Rique/Documents/GitHub/HidroViewer/src/view/form/CadastroForm.java</file>
-            <file>file:/C:/Users/Rique/Documents/GitHub/HidroViewer/src/controllers/ClienteDAO.java</file>
-            <file>file:/C:/Users/Rique/Documents/GitHub/HidroViewer/src/services/BD.java</file>
-            <file>file:/C:/Users/Rique/Documents/GitHub/HidroViewer/src/testes/ClienteExcluir.java</file>
-            <file>file:/C:/Users/Rique/Documents/GitHub/HidroViewer/src/application/main/Main.java</file>
+            <file>file:/C:/Users/Pedro/OneDrive%20-%20Etec%20Centro%20Paula%20Souza/Desktop/HidroViewer/src/application/main/Main.java</file>
+            <file>file:/C:/Users/Pedro/OneDrive%20-%20Etec%20Centro%20Paula%20Souza/Desktop/HidroViewer/src/testes/ClienteExcluir.java</file>
+            <file>file:/C:/Users/Pedro/OneDrive%20-%20Etec%20Centro%20Paula%20Souza/Desktop/HidroViewer/src/view/form/ConsumoForm.java</file>
+            <file>file:/C:/Users/Pedro/OneDrive%20-%20Etec%20Centro%20Paula%20Souza/Desktop/HidroViewer/src/controllers/ClienteDAO.java</file>
+            <file>file:/C:/Users/Pedro/OneDrive%20-%20Etec%20Centro%20Paula%20Souza/Desktop/HidroViewer/src/view/drawer/MyDrawerBuilder.java</file>
+            <file>file:/C:/Users/Pedro/OneDrive%20-%20Etec%20Centro%20Paula%20Souza/Desktop/HidroViewer/src/controllers/Graficos.java</file>
+            <file>file:/C:/Users/Pedro/OneDrive%20-%20Etec%20Centro%20Paula%20Souza/Desktop/HidroViewer/src/controllers/LoginController.java</file>
+            <file>file:/C:/Users/Pedro/OneDrive%20-%20Etec%20Centro%20Paula%20Souza/Desktop/HidroViewer/src/services/BD.java</file>
         </group>
     </open-files>
 </project-private>

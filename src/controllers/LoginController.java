@@ -27,7 +27,6 @@ public class LoginController extends BaseController {
                                 String CPF_FUNCIONARIO = bd.rs.getString("CPF_FUNCIONARIO");
                                 String SENHA_FUNCIONARIO= bd.rs.getString("SENHA_FUNCIONARIO");
                                 
-                                
 //                                System.out.println(CPF_FUNCIONARIO+" "+ SENHA_FUNCIONARIO);
 //                                System.out.println(user+ " "+senha);
                                 

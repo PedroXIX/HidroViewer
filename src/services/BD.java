@@ -17,9 +17,11 @@ public class BD {
 	private final String DATABASENAME = "BdNetuno";
 	private final String URL = 
 		"jdbc:sqlserver://localhost:1433;databasename="+DATABASENAME;
-	private final String LOGIN = "henrique"; //MUDAR PARA LOGIN E SENHA
-	private final String SENHA = "123";
+	//private final String LOGIN = "henrique"; //USER HENRIQUE
+	//private final String SENHA = "123";
 	
+        private final String LOGIN = "pedrox"; //USER PEDRO
+	private final String SENHA = "";
 	
 	/**
 	 * Realiza a conexão com o banco de dados

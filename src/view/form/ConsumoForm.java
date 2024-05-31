@@ -1,6 +1,7 @@
 package view.form;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import controllers.Graficos;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
@@ -121,23 +122,22 @@ public class ConsumoForm extends TabbedForm {
     private DefaultPieDataset createData() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         Random random = new Random();
-        dataset.addValue("July (ongoing)", random.nextInt(100));
-        dataset.addValue("June", random.nextInt(100));
-        dataset.addValue("May", random.nextInt(100));
-        dataset.addValue("April", random.nextInt(100));
-        dataset.addValue("March", random.nextInt(100));
-        dataset.addValue("February", random.nextInt(100));
+        dataset.addValue(Graficos.mes(1)+" (Atual)", random.nextInt(100));
+        dataset.addValue(Graficos.mes(2), random.nextInt(100));
+        dataset.addValue(Graficos.mes(3), random.nextInt(100));
+        dataset.addValue(Graficos.mes(4), random.nextInt(100));
+        dataset.addValue(Graficos.mes(5), random.nextInt(100));
         return dataset;
     }
 
     private DefaultPieDataset createPieData() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         Random random = new Random();
-        dataset.addValue("Bags", random.nextInt(100) + 50);
-        dataset.addValue("Hats", random.nextInt(100) + 50);
-        dataset.addValue("Glasses", random.nextInt(100) + 50);
-        dataset.addValue("Watches", random.nextInt(100) + 50);
-        dataset.addValue("Jewelry", random.nextInt(100) + 50);
+        dataset.addValue(Graficos.mes(1), random.nextInt(100));
+        dataset.addValue(Graficos.mes(2), random.nextInt(100));
+        dataset.addValue(Graficos.mes(3), random.nextInt(100));
+        dataset.addValue(Graficos.mes(4), random.nextInt(100));
+        dataset.addValue(Graficos.mes(5), random.nextInt(100));
         return dataset;
     }
 
