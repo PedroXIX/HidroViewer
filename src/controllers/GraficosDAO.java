@@ -20,9 +20,10 @@ public class GraficosDAO extends BaseDAO {
     public static double consumoMes, consumoAno;
     public static int qtdMes;
     public static Date data;
-    
+
     /**
      * Método que retorna a quantidade de meses de acordo com o ano atual
+     *
      * @return - quantidade de meses
      */
     public static int qtdMes() {
@@ -44,8 +45,8 @@ public class GraficosDAO extends BaseDAO {
         }
         return 0;
     }
-    
-        public static Date mesData(int mes) {
+
+    public static Date mesData(int mes) {
         sql = "SELECT DATA_LEITURA AS 'DATA' FROM LEITURA WHERE MONTH(DATA_LEITURA) = MONTH(GETDATE()) - ? AND YEAR(DATA_LEITURA) = YEAR(GETDATE()) GROUP BY DATA_LEITURA";
         if (bd.getConnection()) {
             try {
@@ -114,6 +115,59 @@ public class GraficosDAO extends BaseDAO {
                 consumoMes = bd.rs.getDouble("CONSUMO_MES");
 
                 return consumoMes;
+            } catch (SQLException e) {
+                System.out.println(e);
+            } finally {
+                bd.close();
+            }
+        }
+        return null;
+    }
+
+    public static Double estacaoConsumo(int mes) {
+        sql = "SELECT SUM(CONSUMO) AS 'CONSUMO_MES' FROM LEITURA WHERE MONTH(DATA_LEITURA) = MONTH(GETDATE()) - ? AND YEAR(DATA_LEITURA) = YEAR(GETDATE())";
+        if (bd.getConnection()) {
+            try {
+                switch (mes) {
+                    case 0:
+                        sql = "SELECT SUM(CONSUMO) AS 'VERAO' FROM LEITURA WHERE((MONTH(DATA_LEITURA) = 12 AND DAY(DATA_LEITURA) >= 21) OR (MONTH(DATA_LEITURA) <= 3 AND DAY(DATA_LEITURA) < 21)) AND YEAR(DATA_LEITURA) = YEAR(GETDATE()) - 1";
+                        bd.st = bd.con.prepareStatement(sql);
+                        bd.rs = bd.st.executeQuery();
+                        bd.rs.next();
+
+                        consumoMes = bd.rs.getDouble("VERAO");
+
+                        return consumoMes;
+                    case 1:
+                        sql = "SELECT SUM(CONSUMO) AS 'OUTONO' FROM LEITURA WHERE((MONTH(DATA_LEITURA) = 3 AND DAY(DATA_LEITURA) >= 21) OR (MONTH(DATA_LEITURA) <= 6 AND DAY(DATA_LEITURA) < 21)) AND YEAR(DATA_LEITURA) = YEAR(GETDATE()) - 1";
+                        bd.st = bd.con.prepareStatement(sql);
+                        bd.rs = bd.st.executeQuery();
+                        bd.rs.next();
+
+                        consumoMes = bd.rs.getDouble("OUTONO");
+
+                        return consumoMes;
+                    case 2:
+                        sql = "SELECT SUM(CONSUMO) AS 'INVERNO' FROM LEITURA WHERE((MONTH(DATA_LEITURA) = 6 AND DAY(DATA_LEITURA) >= 21) OR (MONTH(DATA_LEITURA) <= 9 AND DAY(DATA_LEITURA) < 23)) AND YEAR(DATA_LEITURA) = YEAR(GETDATE()) - 1";
+                        bd.st = bd.con.prepareStatement(sql);
+                        bd.rs = bd.st.executeQuery();
+                        bd.rs.next();
+
+                        consumoMes = bd.rs.getDouble("INVERNO");
+
+                        return consumoMes;
+                    case 3:
+                        sql = "SELECT SUM(CONSUMO) AS 'PRIMAVERA' FROM  LEITURA WHERE ((MONTH(DATA_LEITURA) = 9 AND DAY(DATA_LEITURA) >= 23) OR (MONTH(DATA_LEITURA) = 10) OR (MONTH(DATA_LEITURA) = 11) OR (MONTH(DATA_LEITURA) = 12 AND DAY(DATA_LEITURA) < 21) AND YEAR(DATA_LEITURA) = YEAR(GETDATE()));";
+                        bd.st = bd.con.prepareStatement(sql);
+                        bd.rs = bd.st.executeQuery();
+                        bd.rs.next();
+
+                        consumoMes = bd.rs.getDouble("PRIMAVERA");
+
+                        return consumoMes;
+                    default:
+                        return 0.0;
+                }
             } catch (SQLException e) {
                 System.out.println(e);
             } finally {

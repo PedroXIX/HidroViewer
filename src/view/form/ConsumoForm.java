@@ -33,8 +33,6 @@ public class ConsumoForm extends TabbedForm {
     /**
      * Creates new form TestForm
      */
-
-
     public ConsumoForm() {
         initComponents();
         init();
@@ -49,14 +47,17 @@ public class ConsumoForm extends TabbedForm {
     }
 
     private void createPieChartsPanel() {
-        JPanel pieChartsPanel = new JPanel(new MigLayout("fill, insets 0", "[45%][45%]", "[]"));
+        JPanel pieChartsPanel = new JPanel(new MigLayout("fill, insets 0", "[33%][33%][33%]", "[]"));
 
         pieChart1 = createPieChart("CONSUMO MENSAL");
         pieChartsPanel.add(pieChart1, "cell 0 0, grow");
 
+        pieChart2 = createPieChartEstacao("MÉDIA MENSAL");
+        pieChartsPanel.add(pieChart2, "cell 1 0, grow");
+
         pieChart3 = createPieChartAno("CONSUMO ANUAL");
         pieChart3.setChartType(PieChart.ChartType.DONUT_CHART);
-        pieChartsPanel.add(pieChart3, "cell 1 0, grow");
+        pieChartsPanel.add(pieChart3, "cell 2 0, grow");
 
         add(new JScrollPane(pieChartsPanel), "grow, height 290");
     }
@@ -80,8 +81,8 @@ public class ConsumoForm extends TabbedForm {
         pieChart.setDataset(createPieData());
         return pieChart;
     }
-    
-    private PieChart createPieChartAno(String headerText){
+
+    private PieChart createPieChartAno(String headerText) {
         PieChart pieChart = new PieChart();
         JLabel header = new JLabel(headerText);
         header.putClientProperty(FlatClientProperties.STYLE, "font:+1");
@@ -98,6 +99,26 @@ public class ConsumoForm extends TabbedForm {
         );
         applyStyle(pieChart);
         pieChart.setDataset(createPieDataAno());
+        return pieChart;
+    }
+
+    private PieChart createPieChartEstacao(String headerText) {
+        PieChart pieChart = new PieChart();
+        JLabel header = new JLabel(headerText);
+        header.putClientProperty(FlatClientProperties.STYLE, "font:+1");
+        pieChart.setHeader(header);
+        pieChart.getChartColor().addColor(
+                Color.decode("#f87171"),
+                Color.decode("#fb923c"),
+                Color.decode("#fbbf24"),
+                Color.decode("#a3e635"),
+                Color.decode("#34d399"),
+                Color.decode("#22d3ee"),
+                Color.decode("#818cf8"),
+                Color.decode("#c084fc")
+        );
+        applyStyle(pieChart);
+        pieChart.setDataset(createPieDataEstacao());
         return pieChart;
     }
 
@@ -137,17 +158,17 @@ public class ConsumoForm extends TabbedForm {
 
     private DefaultPieDataset createData() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        dataset.addValue(GraficosDAO.mes(0)+" (Atual)", GraficosDAO.mesConsumo(0));
+        dataset.addValue(GraficosDAO.mes(0) + " (Atual)", GraficosDAO.mesConsumo(0));
         dataset.addValue(GraficosDAO.mes(1), GraficosDAO.mesConsumo(1));
         dataset.addValue(GraficosDAO.mes(2), GraficosDAO.mesConsumo(2));
         dataset.addValue(GraficosDAO.mes(3), GraficosDAO.mesConsumo(3));
         dataset.addValue(GraficosDAO.mes(4), GraficosDAO.mesConsumo(4));
         return dataset;
     }
-    
-        private DefaultPieDataset createDataAno() {
+
+    private DefaultPieDataset createDataAno() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        dataset.addValue(GraficosDAO.ano(1)+ " (Atual)", GraficosDAO.anoConsumo(1));
+        dataset.addValue(GraficosDAO.ano(1) + " (Atual)", GraficosDAO.anoConsumo(1));
         dataset.addValue(GraficosDAO.ano(2), GraficosDAO.anoConsumo(2));
         dataset.addValue(GraficosDAO.ano(3), GraficosDAO.anoConsumo(3));
         dataset.addValue(GraficosDAO.ano(4), GraficosDAO.anoConsumo(4));
@@ -157,15 +178,25 @@ public class ConsumoForm extends TabbedForm {
 
     private DefaultPieDataset createPieData() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        dataset.addValue(GraficosDAO.mes(0)+" (Atual)", GraficosDAO.mesConsumo(0));
+        dataset.addValue(GraficosDAO.mes(0) + " (Atual)", GraficosDAO.mesConsumo(0));
         dataset.addValue(GraficosDAO.mes(1), GraficosDAO.mesConsumo(1));
         dataset.addValue(GraficosDAO.mes(2), GraficosDAO.mesConsumo(2));
         dataset.addValue(GraficosDAO.mes(3), GraficosDAO.mesConsumo(3));
         dataset.addValue(GraficosDAO.mes(4), GraficosDAO.mesConsumo(4));
         return dataset;
     }
-    
-        private DefaultPieDataset createPieDataAno() {
+        
+
+    private DefaultPieDataset createPieDataEstacao() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+        dataset.addValue("Verão", GraficosDAO.estacaoConsumo(0));
+        dataset.addValue("Outono", GraficosDAO.estacaoConsumo(1));
+        dataset.addValue("Inverno", GraficosDAO.estacaoConsumo(2));
+        dataset.addValue("Primavera", GraficosDAO.estacaoConsumo(3));
+        return dataset;
+    }
+
+    private DefaultPieDataset createPieDataAno() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
         dataset.addValue(GraficosDAO.ano(1), GraficosDAO.anoConsumo(1));
         dataset.addValue(GraficosDAO.ano(2), GraficosDAO.anoConsumo(2));
@@ -179,10 +210,10 @@ public class ConsumoForm extends TabbedForm {
         DefaultCategoryDataset<String, String> categoryDataset = new DefaultCategoryDataset<>();
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy");
-        
-        for (int i = 1; i <  GraficosDAO.qtdMes(); i++) {
+
+        for (int i = GraficosDAO.qtdMes() - 1; i >= 0; i--) {
             String date = df.format(GraficosDAO.mesData(i));
-            categoryDataset.addValue( GraficosDAO.mesConsumo(i), "Consumo", date);
+            categoryDataset.addValue(GraficosDAO.mesConsumo(i), "Consumo", date);
             cal.add(Calendar.DATE, 1);
         }
 
@@ -199,7 +230,7 @@ public class ConsumoForm extends TabbedForm {
                 + "background:$Component.background;"
                 + "font:$Component.font;"
                 + "foreground:$Component.foreground"
-               );
+        );
         for (var component : panel.getComponents()) {
             if (component instanceof JLabel) {
                 ((JLabel) component).putClientProperty(FlatClientProperties.STYLE, ""
@@ -218,6 +249,7 @@ public class ConsumoForm extends TabbedForm {
         barChart1.startAnimation();
         barChart2.startAnimation();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
