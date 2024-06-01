@@ -52,7 +52,7 @@ public class ConsumoForm extends TabbedForm {
         pieChart1 = createPieChart("CONSUMO MENSAL");
         pieChartsPanel.add(pieChart1, "cell 0 0, grow");
 
-        pieChart2 = createPieChartEstacao("MÉDIA MENSAL");
+        pieChart2 = createPieChartEstacao("CONSUMO SAZONAL");
         pieChartsPanel.add(pieChart2, "cell 1 0, grow");
 
         pieChart3 = createPieChartAno("CONSUMO ANUAL");
@@ -210,10 +210,11 @@ public class ConsumoForm extends TabbedForm {
         DefaultCategoryDataset<String, String> categoryDataset = new DefaultCategoryDataset<>();
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy");
-
         for (int i = GraficosDAO.qtdMes() - 1; i >= 0; i--) {
             String date = df.format(GraficosDAO.mesData(i));
             categoryDataset.addValue(GraficosDAO.mesConsumo(i), "Consumo", date);
+            categoryDataset.addValue(GraficosDAO.mesConsumo(i,1), "2023", date);
+            categoryDataset.addValue(GraficosDAO.mesConsumo(i,2), "2024", date);
             cal.add(Calendar.DATE, 1);
         }
 

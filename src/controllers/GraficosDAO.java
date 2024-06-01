@@ -45,7 +45,11 @@ public class GraficosDAO extends BaseDAO {
         }
         return 0;
     }
-
+    /**
+     * Método que retorna a data completa de acordo com o mês informad
+     * @param mes - valor inteiro que indica o mês a ser buscado, mes = 1 
+     * @return 
+     */
     public static Date mesData(int mes) {
         sql = "SELECT DATA_LEITURA AS 'DATA' FROM LEITURA WHERE MONTH(DATA_LEITURA) = MONTH(GETDATE()) - ? AND YEAR(DATA_LEITURA) = YEAR(GETDATE()) GROUP BY DATA_LEITURA";
         if (bd.getConnection()) {
@@ -123,6 +127,38 @@ public class GraficosDAO extends BaseDAO {
         }
         return null;
     }
+    
+    /**
+     * Método que devolve o valor do consumo de acordo com o mês e ano
+     *
+     * @param mes - valor inteiro que indica o mês a ser buscado, mes = 1
+     * @param ano - valor inteiro que indica o ano a ser buscado, ano = 1
+     * equivale ao atual
+     * @return
+     */
+    public static Double mesConsumo(int mes, int ano) {
+        sql = "SELECT SUM(CONSUMO) AS 'CONSUMO_MES' FROM LEITURA WHERE MONTH(DATA_LEITURA) = MONTH(GETDATE()) - ? AND YEAR(DATA_LEITURA) = YEAR(GETDATE())-?";
+        if (bd.getConnection()) {
+            try {
+
+                bd.st = bd.con.prepareStatement(sql);
+                bd.st.setString(1, "" + mes + "");
+                bd.st.setString(2, "" + ano + "");
+                bd.rs = bd.st.executeQuery();
+                bd.rs.next();
+
+                consumoMes = bd.rs.getDouble("CONSUMO_MES");
+
+                return consumoMes;
+            } catch (SQLException e) {
+                System.out.println(e);
+            } finally {
+                bd.close();
+            }
+        }
+        return null;
+    }
+    
 
     public static Double estacaoConsumo(int mes) {
         sql = "SELECT SUM(CONSUMO) AS 'CONSUMO_MES' FROM LEITURA WHERE MONTH(DATA_LEITURA) = MONTH(GETDATE()) - ? AND YEAR(DATA_LEITURA) = YEAR(GETDATE())";
