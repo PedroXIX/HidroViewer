@@ -1,12 +1,11 @@
 package view.form;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import controllers.Graficos;
+import controllers.GraficosDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Random;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -50,17 +49,14 @@ public class ConsumoForm extends TabbedForm {
     }
 
     private void createPieChartsPanel() {
-        JPanel pieChartsPanel = new JPanel(new MigLayout("fill, insets 0", "[33%][33%][33%]", "[]"));
+        JPanel pieChartsPanel = new JPanel(new MigLayout("fill, insets 0", "[45%][45%]", "[]"));
 
         pieChart1 = createPieChart("CONSUMO MENSAL");
         pieChartsPanel.add(pieChart1, "cell 0 0, grow");
 
-        pieChart2 = createPieChart("CONSUMO ANUAL");
-        pieChartsPanel.add(pieChart2, "cell 1 0, grow");
-
-        pieChart3 = createPieChart("CONSUMO DE ACORDO COM A CIDADE");
+        pieChart3 = createPieChartAno("CONSUMO ANUAL");
         pieChart3.setChartType(PieChart.ChartType.DONUT_CHART);
-        pieChartsPanel.add(pieChart3, "cell 2 0, grow");
+        pieChartsPanel.add(pieChart3, "cell 1 0, grow");
 
         add(new JScrollPane(pieChartsPanel), "grow, height 290");
     }
@@ -84,6 +80,26 @@ public class ConsumoForm extends TabbedForm {
         pieChart.setDataset(createPieData());
         return pieChart;
     }
+    
+    private PieChart createPieChartAno(String headerText){
+        PieChart pieChart = new PieChart();
+        JLabel header = new JLabel(headerText);
+        header.putClientProperty(FlatClientProperties.STYLE, "font:+1");
+        pieChart.setHeader(header);
+        pieChart.getChartColor().addColor(
+                Color.decode("#f87171"),
+                Color.decode("#fb923c"),
+                Color.decode("#fbbf24"),
+                Color.decode("#a3e635"),
+                Color.decode("#34d399"),
+                Color.decode("#22d3ee"),
+                Color.decode("#818cf8"),
+                Color.decode("#c084fc")
+        );
+        applyStyle(pieChart);
+        pieChart.setDataset(createPieDataAno());
+        return pieChart;
+    }
 
     private void createLineChart() {
         lineChart = new LineChart();
@@ -96,7 +112,7 @@ public class ConsumoForm extends TabbedForm {
     private void createBarChart() {
         // BarChart 1
         barChart1 = new HorizontalBarChart();
-        JLabel header1 = new JLabel("Monthly Income");
+        JLabel header1 = new JLabel("Consumo Mensal");
         header1.putClientProperty(FlatClientProperties.STYLE, "font:+1; border:0,0,5,0");
         barChart1.setHeader(header1);
         barChart1.setBarColor(Color.decode("#f97316"));
@@ -108,11 +124,11 @@ public class ConsumoForm extends TabbedForm {
 
         // BarChart 2
         barChart2 = new HorizontalBarChart();
-        JLabel header2 = new JLabel("Monthly Expense");
+        JLabel header2 = new JLabel("Consumo Anual");
         header2.putClientProperty(FlatClientProperties.STYLE, "font:+1; border:0,0,5,0");
         barChart2.setHeader(header2);
         barChart2.setBarColor(Color.decode("#10b981"));
-        barChart2.setDataset(createData());
+        barChart2.setDataset(createDataAno());
         JPanel panel2 = new JPanel(new BorderLayout());
         applyStyle(panel2);
         panel2.add(barChart2);
@@ -121,23 +137,41 @@ public class ConsumoForm extends TabbedForm {
 
     private DefaultPieDataset createData() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        Random random = new Random();
-        dataset.addValue(Graficos.mes(1)+" (Atual)", random.nextInt(100));
-        dataset.addValue(Graficos.mes(2), random.nextInt(100));
-        dataset.addValue(Graficos.mes(3), random.nextInt(100));
-        dataset.addValue(Graficos.mes(4), random.nextInt(100));
-        dataset.addValue(Graficos.mes(5), random.nextInt(100));
+        dataset.addValue(GraficosDAO.mes(0)+" (Atual)", GraficosDAO.mesConsumo(0));
+        dataset.addValue(GraficosDAO.mes(1), GraficosDAO.mesConsumo(1));
+        dataset.addValue(GraficosDAO.mes(2), GraficosDAO.mesConsumo(2));
+        dataset.addValue(GraficosDAO.mes(3), GraficosDAO.mesConsumo(3));
+        dataset.addValue(GraficosDAO.mes(4), GraficosDAO.mesConsumo(4));
+        return dataset;
+    }
+    
+        private DefaultPieDataset createDataAno() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+        dataset.addValue(GraficosDAO.ano(1)+ " (Atual)", GraficosDAO.anoConsumo(1));
+        dataset.addValue(GraficosDAO.ano(2), GraficosDAO.anoConsumo(2));
+        dataset.addValue(GraficosDAO.ano(3), GraficosDAO.anoConsumo(3));
+        dataset.addValue(GraficosDAO.ano(4), GraficosDAO.anoConsumo(4));
+        dataset.addValue(GraficosDAO.ano(5), GraficosDAO.anoConsumo(5));
         return dataset;
     }
 
     private DefaultPieDataset createPieData() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        Random random = new Random();
-        dataset.addValue(Graficos.mes(1), random.nextInt(100));
-        dataset.addValue(Graficos.mes(2), random.nextInt(100));
-        dataset.addValue(Graficos.mes(3), random.nextInt(100));
-        dataset.addValue(Graficos.mes(4), random.nextInt(100));
-        dataset.addValue(Graficos.mes(5), random.nextInt(100));
+        dataset.addValue(GraficosDAO.mes(0)+" (Atual)", GraficosDAO.mesConsumo(0));
+        dataset.addValue(GraficosDAO.mes(1), GraficosDAO.mesConsumo(1));
+        dataset.addValue(GraficosDAO.mes(2), GraficosDAO.mesConsumo(2));
+        dataset.addValue(GraficosDAO.mes(3), GraficosDAO.mesConsumo(3));
+        dataset.addValue(GraficosDAO.mes(4), GraficosDAO.mesConsumo(4));
+        return dataset;
+    }
+    
+        private DefaultPieDataset createPieDataAno() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+        dataset.addValue(GraficosDAO.ano(1), GraficosDAO.anoConsumo(1));
+        dataset.addValue(GraficosDAO.ano(2), GraficosDAO.anoConsumo(2));
+        dataset.addValue(GraficosDAO.ano(3), GraficosDAO.anoConsumo(3));
+        dataset.addValue(GraficosDAO.ano(4), GraficosDAO.anoConsumo(4));
+        dataset.addValue(GraficosDAO.ano(5), GraficosDAO.anoConsumo(5));
         return dataset;
     }
 
@@ -145,19 +179,16 @@ public class ConsumoForm extends TabbedForm {
         DefaultCategoryDataset<String, String> categoryDataset = new DefaultCategoryDataset<>();
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy");
-        Random ran = new Random();
-        int randomDate = 30;
-        for (int i = 1; i <= randomDate; i++) {
-            String date = df.format(cal.getTime());
-            categoryDataset.addValue(ran.nextInt(700) + 5, "Income", date);
-            categoryDataset.addValue(ran.nextInt(700) + 5, "Expense", date);
-            categoryDataset.addValue(ran.nextInt(700) + 5, "Profit", date);
+        
+        for (int i = 1; i <  GraficosDAO.qtdMes(); i++) {
+            String date = df.format(GraficosDAO.mesData(i));
+            categoryDataset.addValue( GraficosDAO.mesConsumo(i), "Consumo", date);
             cal.add(Calendar.DATE, 1);
         }
 
         lineChart.setCategoryDataset(categoryDataset);
         lineChart.getChartColor().addColor(Color.decode("#38bdf8"), Color.decode("#fb7185"), Color.decode("#34d399"));
-        JLabel header = new JLabel("Income Data");
+        JLabel header = new JLabel("Consumo ao longo dos meses");
         header.putClientProperty(FlatClientProperties.STYLE, "font:+1; border:0,0,5,0");
         lineChart.setHeader(header);
     }

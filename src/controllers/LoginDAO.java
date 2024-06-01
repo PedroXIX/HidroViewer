@@ -14,7 +14,7 @@ import raven.popup.component.PopupController;
  *
  * @author Pedro
  */
-public class LoginController extends BaseController {
+public class LoginDAO extends BaseDAO {
     
     public void logar(String cpf, String senha){
 		if (bd.getConnection()) {
