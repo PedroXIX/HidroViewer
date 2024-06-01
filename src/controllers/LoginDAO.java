@@ -14,7 +14,7 @@ import raven.popup.component.PopupController;
  *
  * @author Pedro
  */
-public class LoginController extends BaseController {
+public class LoginDAO extends BaseDAO {
     
     public void logar(String cpf, String senha){
 		if (bd.getConnection()) {
@@ -26,7 +26,6 @@ public class LoginController extends BaseController {
                                 bd.rs.next();
                                 String CPF_FUNCIONARIO = bd.rs.getString("CPF_FUNCIONARIO");
                                 String SENHA_FUNCIONARIO= bd.rs.getString("SENHA_FUNCIONARIO");
-                                
                                 
 //                                System.out.println(CPF_FUNCIONARIO+" "+ SENHA_FUNCIONARIO);
 //                                System.out.println(user+ " "+senha);
