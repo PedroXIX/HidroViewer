@@ -20,6 +20,11 @@ public class BD {
 	private final String LOGIN = "henrique"; //MUDAR PARA LOGIN E SENHA
 	private final String SENHA = "123";
 	
+<<<<<<< Updated upstream
+=======
+        private final String LOGIN = "henrique"; //USER PEDRO
+	private final String SENHA = "123";
+>>>>>>> Stashed changes
 	
 	/**
 	 * Realiza a conexão com o banco de dados

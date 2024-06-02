@@ -8,10 +8,11 @@ import raven.drawer.component.menu.MenuEvent;
 import raven.drawer.component.menu.MenuValidation;
 import raven.drawer.component.menu.SimpleMenuOption;
 import view.form.ConsumoForm;
-import view.form.CadastroForm;
+import view.form.CadastroClienteForm;
 import application.main.Main;
 import models.FuncionarioModel;
 import raven.swing.AvatarIcon;
+import view.form.CadastroLeituraForm;
 import view.tabbed.WindowsTabbed;
 
 /**
@@ -34,7 +35,7 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
         String menus[][] = {
             {"~PRINCIPAL~"},
             {"Consumo"},
-            {"Cliente", "Cadastro", "Consulta", "Atualizar"},
+            {"Consultas", "Cliente", "Leitura", "Atualizar"},
             {"~OUTROS~"},
             {"Logout"}};
 
@@ -55,7 +56,10 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                             WindowsTabbed.getInstance().addTab("Consumo", new ConsumoForm());
                         }
                         else if (index == 1 && subIndex==1) {
-                            WindowsTabbed.getInstance().addTab("Cadastro", new CadastroForm());
+                            WindowsTabbed.getInstance().addTab("Cadastro", new CadastroClienteForm());
+                        }
+                        else if(index == 1 && subIndex==2){
+                            WindowsTabbed.getInstance().addTab("Cadastro", new CadastroLeituraForm());
                         }else if (index == 2) {
                             Main.main.login();
                         }

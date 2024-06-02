@@ -20,7 +20,7 @@ import java.sql.SQLException;
  *
  * @author RAVEN
  */
-public class CadastroForm extends TabbedForm {
+public class CadastroClienteForm extends TabbedForm {
     private ClienteDAO dao;
     private Cliente c;
     
@@ -30,7 +30,7 @@ public class CadastroForm extends TabbedForm {
     /**
      * Creates new form TestForm
      */
-    public CadastroForm() {
+    public CadastroClienteForm() {
         dao = new ClienteDAO();
         c = new Cliente();
         bd = new BD();
@@ -129,6 +129,7 @@ public class CadastroForm extends TabbedForm {
         });
 
         atualizarGrade();
+        table.setDragEnabled(true);
         table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tableMouseClicked(evt);
@@ -346,7 +347,7 @@ public class CadastroForm extends TabbedForm {
         model = MyTableModel.getModel(bd, "select * from cliente");
         table.setModel(model);
         table.getTableHeader().setReorderingAllowed(false);
-     
+        
         
     }
 
