@@ -20,9 +20,9 @@ public class BD {
 	//private final String LOGIN = "henrique"; //USER HENRIQUE
 	//private final String SENHA = "123";
 	
-        private final String LOGIN = "pedrox"; //USER PEDRO
+  private final String LOGIN = "pedrox"; //USER PEDRO
 	private final String SENHA = "";
-	
+
 	/**
 	 * Realiza a conexão com o banco de dados
 	 * @return - true em caso de sucesso, ou false caso contrário
