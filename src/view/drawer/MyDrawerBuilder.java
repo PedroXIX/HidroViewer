@@ -22,6 +22,11 @@ import view.tabbed.WindowsTabbed;
 public class MyDrawerBuilder extends SimpleDrawerBuilder {
 
     Funcionario funcionario = Main.getFuncionario();
+    
+    /**
+     * Método que define a cabeçalho do menu
+     * @return - cabeçalho definido
+     */
     @Override
     public SimpleHeaderData getSimpleHeaderData() {
         return new SimpleHeaderData()
@@ -29,7 +34,11 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                 .setTitle("João Silva")
                 .setDescription("joaosilva@gmail.com");
     }
-
+    
+    /**
+     * Método que cria e define os itens do menu
+     * @return - menu definido
+     */
     @Override
     public SimpleMenuOption getSimpleMenuOption() {
         String menus[][] = {
@@ -80,13 +89,21 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                 });
     }
 
+    /**
+     * Método que define o rodapé
+     * @return - rodapé que foi definido
+     */
     @Override
     public SimpleFooterData getSimpleFooterData() {
         return new SimpleFooterData()
                 .setTitle("HidroViewer")
                 .setDescription("Version 1.1.0");
     }
-
+    
+    /**
+     * Método que define a largura do menu
+     * @return 
+     */
     @Override
     public int getDrawerWidth() {
         return 275;

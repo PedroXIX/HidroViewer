@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatClientProperties;
 import controllers.GraficosDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import javax.swing.JLabel;
@@ -45,7 +46,10 @@ public class ConsumoForm extends TabbedForm {
         createLineChart();
         createBarChart();
     }
-
+    
+    /**
+     * Método que adiciona os gráficos no painel
+     */
     private void createPieChartsPanel() {
         JPanel pieChartsPanel = new JPanel(new MigLayout("fill, insets 0", "[33%][33%][33%]", "[]"));
 
@@ -61,7 +65,12 @@ public class ConsumoForm extends TabbedForm {
 
         add(new JScrollPane(pieChartsPanel), "grow, height 290");
     }
-
+    
+    /**
+     * Método que cria um gráfico de pizza
+     * @param headerText - cabeçalho do gráfico
+     * @return - gráfico gerado
+     */
     private PieChart createPieChart(String headerText) {
         PieChart pieChart = new PieChart();
         JLabel header = new JLabel(headerText);
@@ -137,6 +146,7 @@ public class ConsumoForm extends TabbedForm {
         barChart2.setHeader(header2);
         barChart2.setBarColor(Color.decode("#6baed6"));
         barChart2.setDataset(createDataAno());
+        //barChart2.setValuesFormat(new DecimalFormat("#,#0.00"));
         JPanel panel2 = new JPanel(new BorderLayout());
         applyStyle(panel2);
         panel2.add(barChart2);
