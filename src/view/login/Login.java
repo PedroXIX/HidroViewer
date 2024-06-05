@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
-import controllers.LoginController;
+import controllers.LoginDAO;
 
 public class Login extends JPanel {
 
@@ -40,7 +40,7 @@ public class Login extends JPanel {
 
         cmdLogin.addActionListener((e) -> {
             //  Do action login here
-            LoginController lc = new LoginController();
+            LoginDAO lc = new LoginDAO();
             lc.logar(txtCpf.getText(), String.valueOf(txtPassword.getPassword()));
         });
         txtCpf.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your username or email");

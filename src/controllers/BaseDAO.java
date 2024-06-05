@@ -10,7 +10,7 @@ import services.BD;
  *
  * @author Pedro
  */
-public class BaseController {
+public class BaseDAO {
    public static BD bd =  new BD();
     
 }
