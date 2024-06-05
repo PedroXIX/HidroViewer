@@ -10,7 +10,7 @@ import raven.drawer.component.menu.SimpleMenuOption;
 import view.form.ConsumoForm;
 import view.form.CadastroClienteForm;
 import application.main.Main;
-import models.FuncionarioModel;
+import controllers.Funcionario;
 import raven.swing.AvatarIcon;
 import view.form.CadastroLeituraForm;
 import view.tabbed.WindowsTabbed;
@@ -21,13 +21,13 @@ import view.tabbed.WindowsTabbed;
  */
 public class MyDrawerBuilder extends SimpleDrawerBuilder {
 
-    FuncionarioModel funcionario = Main.getFuncionario();
+    Funcionario funcionario = Main.getFuncionario();
     @Override
     public SimpleHeaderData getSimpleHeaderData() {
         return new SimpleHeaderData()
                 .setIcon(new AvatarIcon(getClass().getResource("/view/image/profile.png"), 60, 60, 999))
-                .setTitle(Main.funcionario.getNomeFuncionario())
-                .setDescription(Main.funcionario.getEmailFuncionario());
+                .setTitle("João Silva")
+                .setDescription("joaosilva@gmail.com");
     }
 
     @Override
@@ -35,7 +35,7 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
         String menus[][] = {
             {"~PRINCIPAL~"},
             {"Consumo"},
-            {"Consultas", "Cliente", "Leitura", "Atualizar"},
+            {"Consultas", "Cliente", "Leitura"},
             {"~OUTROS~"},
             {"Logout"}};
 
@@ -83,7 +83,7 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
     @Override
     public SimpleFooterData getSimpleFooterData() {
         return new SimpleFooterData()
-                .setTitle("Java Swing Drawer")
+                .setTitle("HidroViewer")
                 .setDescription("Version 1.1.0");
     }
 

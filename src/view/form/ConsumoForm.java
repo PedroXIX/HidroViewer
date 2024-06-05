@@ -68,15 +68,11 @@ public class ConsumoForm extends TabbedForm {
         header.putClientProperty(FlatClientProperties.STYLE, "font:+1");
         pieChart.setHeader(header);
         pieChart.getChartColor().addColor(
-                Color.decode("#f87171"),
-                Color.decode("#fb923c"),
-                Color.decode("#fbbf24"),
-                Color.decode("#a3e635"),
-                Color.decode("#34d399"),
-                Color.decode("#22d3ee"),
-                Color.decode("#818cf8"),
-                Color.decode("#c084fc")
-        );
+                Color.decode("#1f77b4"),
+                Color.decode("#4292c6"),
+                Color.decode("#6baed6"),
+                Color.decode("#9ecae1"),
+                Color.decode("#a9cfe9"));
         applyStyle(pieChart);
         pieChart.setDataset(createPieData());
         return pieChart;
@@ -88,15 +84,11 @@ public class ConsumoForm extends TabbedForm {
         header.putClientProperty(FlatClientProperties.STYLE, "font:+1");
         pieChart.setHeader(header);
         pieChart.getChartColor().addColor(
-                Color.decode("#f87171"),
-                Color.decode("#fb923c"),
-                Color.decode("#fbbf24"),
-                Color.decode("#a3e635"),
-                Color.decode("#34d399"),
-                Color.decode("#22d3ee"),
-                Color.decode("#818cf8"),
-                Color.decode("#c084fc")
-        );
+                Color.decode("#6baed6"),
+                Color.decode("#4292c6"),
+                Color.decode("#2171b5"),
+                Color.decode("#08519c"),
+                Color.decode("#08306b"));
         applyStyle(pieChart);
         pieChart.setDataset(createPieDataAno());
         return pieChart;
@@ -107,16 +99,11 @@ public class ConsumoForm extends TabbedForm {
         JLabel header = new JLabel(headerText);
         header.putClientProperty(FlatClientProperties.STYLE, "font:+1");
         pieChart.setHeader(header);
-        pieChart.getChartColor().addColor(
-                Color.decode("#f87171"),
-                Color.decode("#fb923c"),
-                Color.decode("#fbbf24"),
-                Color.decode("#a3e635"),
-                Color.decode("#34d399"),
-                Color.decode("#22d3ee"),
-                Color.decode("#818cf8"),
-                Color.decode("#c084fc")
-        );
+        pieChart.getChartColor().addColor(              
+                Color.decode("#6baed6"),
+                Color.decode("#4292c6"),
+                Color.decode("#2171b5"),
+                Color.decode("#084594"));
         applyStyle(pieChart);
         pieChart.setDataset(createPieDataEstacao());
         return pieChart;
@@ -136,7 +123,7 @@ public class ConsumoForm extends TabbedForm {
         JLabel header1 = new JLabel("Consumo Mensal");
         header1.putClientProperty(FlatClientProperties.STYLE, "font:+1; border:0,0,5,0");
         barChart1.setHeader(header1);
-        barChart1.setBarColor(Color.decode("#f97316"));
+        barChart1.setBarColor(Color.decode("#1f77b4"));
         barChart1.setDataset(createData());
         JPanel panel1 = new JPanel(new BorderLayout());
         applyStyle(panel1);
@@ -148,7 +135,7 @@ public class ConsumoForm extends TabbedForm {
         JLabel header2 = new JLabel("Consumo Anual");
         header2.putClientProperty(FlatClientProperties.STYLE, "font:+1; border:0,0,5,0");
         barChart2.setHeader(header2);
-        barChart2.setBarColor(Color.decode("#10b981"));
+        barChart2.setBarColor(Color.decode("#6baed6"));
         barChart2.setDataset(createDataAno());
         JPanel panel2 = new JPanel(new BorderLayout());
         applyStyle(panel2);
@@ -185,7 +172,6 @@ public class ConsumoForm extends TabbedForm {
         dataset.addValue(GraficosDAO.mes(4), GraficosDAO.mesConsumo(4));
         return dataset;
     }
-        
 
     private DefaultPieDataset createPieDataEstacao() {
         DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
@@ -213,18 +199,25 @@ public class ConsumoForm extends TabbedForm {
         for (int i = GraficosDAO.qtdMes() - 1; i >= 0; i--) {
             String date = df.format(GraficosDAO.mesData(i));
             categoryDataset.addValue(GraficosDAO.mesConsumo(i), "Consumo", date);
-            categoryDataset.addValue(GraficosDAO.mesConsumo(i,1), "2023", date);
-            categoryDataset.addValue(GraficosDAO.mesConsumo(i,2), "2024", date);
+            categoryDataset.addValue(GraficosDAO.mesConsumo(i, 1), "2024", date);
+            categoryDataset.addValue(GraficosDAO.mesConsumo(i, 2), "2023", date);
             cal.add(Calendar.DATE, 1);
         }
 
         lineChart.setCategoryDataset(categoryDataset);
-        lineChart.getChartColor().addColor(Color.decode("#38bdf8"), Color.decode("#fb7185"), Color.decode("#34d399"));
+        lineChart.getChartColor().addColor(                Color.decode("#6baed6"));
+            lineChart.getChartColor().addColor(    Color.decode("#4292c6"));
+            lineChart.getChartColor().addColor(     Color.decode("#2171b5"));
         JLabel header = new JLabel("Consumo ao longo dos meses");
         header.putClientProperty(FlatClientProperties.STYLE, "font:+1; border:0,0,5,0");
         lineChart.setHeader(header);
     }
 
+    /**
+     * Aplica os padrões de formatação a um objeto JPanel
+     *
+     * @param panel - objeto que será formatado
+     */
     private void applyStyle(JPanel panel) {
         panel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:5,5,5,5,$Component.borderColor;"

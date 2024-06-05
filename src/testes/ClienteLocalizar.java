@@ -5,7 +5,7 @@
 package testes;
 
 import controllers.ClienteDAO;
-import models.Cliente;
+import controllers.Cliente;
 
 /**
  *

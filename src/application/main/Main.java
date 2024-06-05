@@ -5,7 +5,7 @@ import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import java.awt.Font;
 import javax.swing.UIManager;
-import models.FuncionarioModel;
+import controllers.Funcionario;
 import raven.drawer.Drawer;
 import view.drawer.MyDrawerBuilder;
 import view.login.Login;
@@ -15,24 +15,24 @@ import raven.toast.Notifications;
 
 /**
  *
- * @author RAVEN
+ * @author Pedro
  */
 public class Main extends javax.swing.JFrame {
 
     public static Main main;
     private Login loginForm;
-    public static FuncionarioModel funcionario = new FuncionarioModel();
+    public static Funcionario funcionario = new Funcionario();
 
-    public static void setFuncionario(FuncionarioModel funcionario) {
+    public static void setFuncionario(Funcionario funcionario) {
         Main.funcionario = funcionario;
     }
 
-    public static FuncionarioModel getFuncionario() {
+    public static Funcionario getFuncionario() {
         return funcionario;
     }
     
     /**
-     * Creates new form Main
+     * Cria um novo form Main
      */
     public Main() {
         initComponents();
@@ -45,11 +45,13 @@ public class Main extends javax.swing.JFrame {
         MyDrawerBuilder myDrawerBuilder = new MyDrawerBuilder();
         Drawer.getInstance().setDrawerBuilder(myDrawerBuilder);
         WindowsTabbed.getInstance().install(this, body);
-        // applyComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         //login();
         showMainForm();
     }
-
+    
+    /**
+     * Método que chama a função a login
+     */
     public void login() {
         if (loginForm == null) {
             loginForm = new Login();
@@ -60,13 +62,14 @@ public class Main extends javax.swing.JFrame {
         revalidate();
         repaint();
     }
-
+    
+    /**
+     * Método que abre e define o conteúdo do form principal
+     */
     public void showMainForm() {
         WindowsTabbed.getInstance().showTabbed(true);
         WindowsTabbed.getInstance().removeAllTabbed();
         setContentPane(body);
-        revalidate();
-        repaint();
         Notifications.getInstance().show(Notifications.Type.INFO, "Olá! "+ funcionario.getNomeFuncionario());
     }
 
@@ -75,10 +78,24 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         body = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         body.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1600, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 704, Short.MAX_VALUE)
+        );
+
+        body.add(jPanel1, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,5 +125,6 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel body;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

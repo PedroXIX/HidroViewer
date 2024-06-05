@@ -6,7 +6,6 @@ package controllers;
 
 import services.BD;
 import java.sql.SQLException;
-import models.Cliente;
 
 /**
  *

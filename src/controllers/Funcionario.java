@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package models;
+package controllers;
 
 /**
  *
  * @author Pedro
  */
-public class FuncionarioModel {
+public class Funcionario {
     private int codFuncionario;
     private String nomeFuncionario,
     cpfFuncionario,
@@ -16,10 +16,10 @@ public class FuncionarioModel {
     emailFuncionario,
     telefoneFuncionario;
 
-    public FuncionarioModel() {
+    public Funcionario() {
     }
 
-    public FuncionarioModel(int codFuncionario, String nomeFuncionario, String cpfFuncionario, String senhaFuncionario, String emailFuncionario, String telefoneFuncionario) {
+    public Funcionario(int codFuncionario, String nomeFuncionario, String cpfFuncionario, String senhaFuncionario, String emailFuncionario, String telefoneFuncionario) {
         this.codFuncionario = codFuncionario;
         this.nomeFuncionario = nomeFuncionario;
         this.cpfFuncionario = cpfFuncionario;

@@ -5,7 +5,6 @@
 package controllers;
 import application.main.Main;
 import java.sql.SQLException;
-import models.FuncionarioModel;
 import raven.alerts.MessageAlerts;
 import raven.popup.component.PopupCallbackAction;
 import raven.popup.component.PopupController;
@@ -35,7 +34,7 @@ public class LoginDAO extends BaseDAO {
                                     String nome = bd.rs.getString("NOME_FUNCIONARIO");
                                     String email = bd.rs.getString("EMAIL_FUNCIONARIO");
                                     String telefone = bd.rs.getString("TELEFONE_FUNCIONARIO");
-                                    FuncionarioModel funcionario = new FuncionarioModel(cod,nome,cpf,senha,email,telefone);
+                                    Funcionario funcionario = new Funcionario(cod,nome,cpf,senha,email,telefone);
                                     Main.main.setFuncionario(funcionario);
                                     Main.main.showMainForm();
                                 }
