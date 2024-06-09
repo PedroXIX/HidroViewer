@@ -4,9 +4,17 @@
  */
 package controllers;
 
+import com.formdev.flatlaf.FlatClientProperties;
 import static controllers.BaseDAO.bd;
+import java.awt.Color;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JLabel;
+import raven.chart.data.category.DefaultCategoryDataset;
+import raven.chart.data.pie.DefaultPieDataset;
+import raven.chart.line.LineChart;
 
 /**
  * Classe responsável por intermediar a relação entre o banco de dados e o
@@ -20,6 +28,7 @@ public class GraficosDAO extends BaseDAO {
     public static double consumoMes, consumoAno;
     public static int qtdMes;
     public static Date data;
+    public static LineChart lineChart;
 
     /**
      * Método que retorna a quantidade de meses de acordo com o ano atual
@@ -270,4 +279,50 @@ public class GraficosDAO extends BaseDAO {
         }
         return null;
     }
+    
+    /**
+     * Método que determina os dados do gráfico mensal
+     *
+     * @return - conjunto de dados que alimentarão o gráfico
+     */
+    public static DefaultPieDataset createDataMes() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+        dataset.addValue(GraficosDAO.mes(0) + " (Atual)", GraficosDAO.mesConsumo(0));
+        dataset.addValue(GraficosDAO.mes(1), GraficosDAO.mesConsumo(1));
+        dataset.addValue(GraficosDAO.mes(2), GraficosDAO.mesConsumo(2));
+        dataset.addValue(GraficosDAO.mes(3), GraficosDAO.mesConsumo(3));
+        dataset.addValue(GraficosDAO.mes(4), GraficosDAO.mesConsumo(4));
+        return dataset;
+    }
+
+    /**
+     * Método que determina os dados do gráfico anual
+     *
+     * @return - conjunto de dados que alimentarão o gráfico
+     */
+    public static DefaultPieDataset createDataAno() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+        dataset.addValue(GraficosDAO.ano(1), GraficosDAO.anoConsumo(1));
+        dataset.addValue(GraficosDAO.ano(2), GraficosDAO.anoConsumo(2));
+        dataset.addValue(GraficosDAO.ano(3), GraficosDAO.anoConsumo(3));
+        dataset.addValue(GraficosDAO.ano(4), GraficosDAO.anoConsumo(4));
+        dataset.addValue(GraficosDAO.ano(5), GraficosDAO.anoConsumo(5));
+        return dataset;
+    }
+
+    /**
+     * Método que determina os dados do gráfico sazonal
+     *
+     * @return - conjunto de dados que alimentarão o gráfico
+     */
+    public static DefaultPieDataset createPieDataEstacao() {
+        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
+        dataset.addValue("Verão", GraficosDAO.estacaoConsumo(0));
+        dataset.addValue("Outono", GraficosDAO.estacaoConsumo(1));
+        dataset.addValue("Inverno", GraficosDAO.estacaoConsumo(2));
+        dataset.addValue("Primavera", GraficosDAO.estacaoConsumo(3));
+        return dataset;
+    }
+
+
 }
