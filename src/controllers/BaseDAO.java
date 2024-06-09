@@ -7,10 +7,9 @@ package controllers;
 import services.BD;
 
 /**
- *
+ * Classe que realiza uma instância da classe BD
  * @author Pedro
  */
 public class BaseDAO {
    public static BD bd =  new BD();
-    
 }
