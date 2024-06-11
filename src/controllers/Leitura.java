@@ -7,7 +7,7 @@ package controllers;
 import java.sql.Date;
 
 /**
- *
+ * Classe responsável por mapear a entidade Leitura provinda do banco de dados, contendo seus atributos
  * @author Rique
  */
 public class Leitura {

@@ -17,7 +17,8 @@ import view.tabbed.TabbedForm;
 import java.sql.SQLException;
 
 /**
- *
+ * Classe que permite o cadastro, atualização, exclusão e consulta de registros na tabela Cliente no banco de dados.
+ * Criação de um design interativo para o cliente com JFrame
  * @author RAVEN
  */
 public class CadastroClienteForm extends TabbedForm {
@@ -28,7 +29,7 @@ public class CadastroClienteForm extends TabbedForm {
     private BD bd;
 
     /**
-     * Creates new form TestForm
+     * Classe voltada a inicialização dos componentes visuais e de objetos de classes que serão utilizadas
      */
     public CadastroClienteForm() {
         dao = new ClienteDAO();
@@ -182,11 +183,11 @@ public class CadastroClienteForm extends TabbedForm {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(tfLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tfLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
@@ -346,6 +347,9 @@ public class CadastroClienteForm extends TabbedForm {
     private javax.swing.JTextField tfTelefone;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Método responsável por atualizar a tabela com as informações de todos os clientes
+     */
     private void atualizarGrade() {
         model = MyTableModel.getModel(bd, "select * from cliente");
         table.setModel(model);
@@ -354,6 +358,9 @@ public class CadastroClienteForm extends TabbedForm {
         
     }
 
+    /**
+     * Método utilizado para limpar os textFields, dexando-os em branco.
+     */
     private void limparCampos() {
         tfCodigo.setText("");
         tfNome.setText("");

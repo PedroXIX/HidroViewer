@@ -8,7 +8,7 @@ import services.BD;
 import java.sql.SQLException;
 
 /**
- *
+ * Classe responsável por realizar interações com o banco de dados referente a entidade Cliente
  * @author Rique
  */
 public class ClienteDAO {
@@ -23,7 +23,7 @@ public class ClienteDAO {
     /**
      * Realiza a gravação de um cliente no banco de dados
      * @param cliente - cliente a ser salvo
-     * @return - mensagem informando o status da execução
+     * @return - Mensagem informando o status da execução 
      */
     public String salvar(Cliente cliente){
         
@@ -50,6 +50,11 @@ public class ClienteDAO {
         return men;
     }
     
+    /**
+     * Realiza o update das informações do cliente no banco de dados
+     * @param cliente - Cliente que terá seus dados atualizados
+     * @return 
+     */
     public String atualizar(Cliente cliente){
         
         sql = "update cliente set cpf_cliente = ?, nome_cliente = ?, email_cliente = ?, telefone_cliente = ? where cod_cliente = ?";
@@ -78,7 +83,7 @@ public class ClienteDAO {
     
     /**
      * Exclui um cliente com base em seu código
-     * @param codigo = coódigo do cliente a ser excluido
+     * @param codigo - coódigo do cliente a ser excluido
      * @return - mensagem com status da operação
      */
     public String excluir(int codigo){

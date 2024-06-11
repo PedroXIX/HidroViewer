@@ -18,7 +18,7 @@ import java.sql.Date;
 import controllers.Leitura;
 
 /**
- *
+ * Classe que permite o cadastro, atualização, exclusão e consulta de registros na tabela Leitura no banco de dados.  
  * @author RAVEN
  */
 public class CadastroLeituraForm extends TabbedForm {

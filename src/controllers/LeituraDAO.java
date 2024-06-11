@@ -8,7 +8,7 @@ import services.BD;
 import java.sql.SQLException;
 
 /**
- *
+ * Classe responsável por realizar interações com o banco de dados referente a entidade Leitura
  * @author Rique
  */
 public class LeituraDAO {
@@ -21,9 +21,9 @@ public class LeituraDAO {
     }
     
     /**
-     * Realiza a gravação de leituras no banco de dados
-     * @param cliente - cliente a ser salvo
-     * @return - mensagem informando o status da execução
+     * Realiza a gravação de uma Leitura no banco de dados
+     * @param leitura - Leitura que será gravada no banco de dados
+     * @return - Mensagem informando o status da operação
      */
     public String salvar(Leitura leitura){
         
@@ -53,6 +53,11 @@ public class LeituraDAO {
         return men;
     }
     
+    /**
+     * Realiza o update das informações da leitura no banco de dados
+     * @param leitura - Leitura que terá seus dados atualizados
+     * @return 
+     */
     public String atualizar(Leitura leitura){
         
         sql = "update leitura set cod_hidrometro = ?, data_leitura = ?, leitura_anterior = ?, leitura_atual = ?, consumo = ?, media_consumo = ? where cod_leitura = ?";
@@ -82,8 +87,8 @@ public class LeituraDAO {
     }
     
     /**
-     * Exclui um cliente com base em seu código
-     * @param codigo = coódigo do cliente a ser excluido
+     * Exclui uma Leitura com base em seu código
+     * @param codigo - coódigo da Leitura a ser excluido
      * @return - mensagem com status da operação
      */
     public String excluir(int codigo){
@@ -113,9 +118,9 @@ public class LeituraDAO {
     }
     
     /**
-     * Localiza um cliente a partir de seu código
-     * @param codigo - código do cliente a ser localizado
-     * @return - o cliente pesquisado como um objeto ou null caso não encontrado
+     * Localiza uma Leitura a partir de seu código
+     * @param codigo - código da Leitura a ser localizado
+     * @return - a Leitura pesquisado como um objeto ou null caso não encontrado
      */
     public Leitura localizar(int codigo){
         Leitura l = new Leitura();

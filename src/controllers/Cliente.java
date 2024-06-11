@@ -5,7 +5,7 @@
 package controllers;
 
 /**
- *
+ * Classe responsável por mapear a entidade Cliente provinda do banco de dados, contendo seus atributos
  * @author Rique
  */
 public class Cliente {
