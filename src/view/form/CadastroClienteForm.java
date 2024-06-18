@@ -1,6 +1,6 @@
 package view.form;
 
-import controllers.ClienteDAO;
+import model.ClienteDAO;
 import java.awt.Dimension;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import controllers.Cliente;
+import model.Cliente;
 import services.BD;
 import services.MyTableModel;
 import view.tabbed.TabbedForm;
@@ -71,18 +71,24 @@ public class CadastroClienteForm extends TabbedForm {
         jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 204, 204));
         jLabel1.setText("Cliente");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(38, 27, 187, 0));
 
         lbCodigo.setText("Codigo");
+        add(lbCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, -1, -1));
 
         tfCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCodigoActionPerformed(evt);
             }
         });
+        add(tfCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 94, -1));
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,14 +96,23 @@ public class CadastroClienteForm extends TabbedForm {
                 btnBuscarActionPerformed(evt);
             }
         });
+        add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 210, 87, -1));
 
         lblNome.setText("Nome");
+        add(lblNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, -1, -1));
+        add(tfNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 193, -1));
 
         lblCpf.setText("CPF");
+        add(lblCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, -1, -1));
+        add(tfCpf, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 193, -1));
 
         lblEmail.setText("Email");
+        add(lblEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, -1, -1));
+        add(tfEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 193, -1));
 
         lblTelefone.setText("Telefone");
+        add(lblTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, -1, -1));
+        add(tfTelefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 193, -1));
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -105,6 +120,7 @@ public class CadastroClienteForm extends TabbedForm {
                 btnSalvarActionPerformed(evt);
             }
         });
+        add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, -1, -1));
 
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +128,7 @@ public class CadastroClienteForm extends TabbedForm {
                 btnNovoActionPerformed(evt);
             }
         });
+        add(btnNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 440, -1, -1));
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -119,7 +136,13 @@ public class CadastroClienteForm extends TabbedForm {
                 btnExcluirActionPerformed(evt);
             }
         });
+        add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, -1, -1));
 
+        tfLocalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfLocalizarActionPerformed(evt);
+            }
+        });
         tfLocalizar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tfLocalizarKeyPressed(evt);
@@ -128,6 +151,7 @@ public class CadastroClienteForm extends TabbedForm {
                 tfLocalizarKeyReleased(evt);
             }
         });
+        add(tfLocalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 160, 513, -1));
 
         atualizarGrade();
         table.setDragEnabled(true);
@@ -140,87 +164,12 @@ public class CadastroClienteForm extends TabbedForm {
 
         jScrollPane2.setViewportView(jScrollPane1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbCodigo)
-                            .addComponent(lblNome)
-                            .addComponent(lblCpf)
-                            .addComponent(lblEmail)
-                            .addComponent(lblTelefone))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tfEmail)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(tfNome, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfCpf, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNovo)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnSalvar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExcluir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                        .addGap(109, 109, 109)))
-                .addGap(141, 141, 141)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
-                    .addComponent(tfLocalizar))
-                .addContainerGap(60, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(tfLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbCodigo)
-                            .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscar))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNome)
-                            .addComponent(tfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblCpf)
-                            .addComponent(tfCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblEmail)
-                            .addComponent(tfEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTelefone)
-                            .addComponent(tfTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(53, 53, 53)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSalvar)
-                            .addComponent(btnNovo)
-                            .addComponent(btnExcluir)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)))
-                .addGap(39, 39, 39))
-        );
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 513, 378));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setText("Clientes");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 260, 45));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCodigoActionPerformed
@@ -324,6 +273,10 @@ public class CadastroClienteForm extends TabbedForm {
         
     }//GEN-LAST:event_btnSalvarActionPerformed
 
+    private void tfLocalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLocalizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfLocalizarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -331,6 +284,7 @@ public class CadastroClienteForm extends TabbedForm {
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbCodigo;

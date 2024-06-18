@@ -10,7 +10,7 @@ import raven.drawer.component.menu.SimpleMenuOption;
 import view.form.ConsumoForm;
 import view.form.CadastroClienteForm;
 import application.main.Main;
-import controllers.Funcionario;
+import model.Funcionario;
 import raven.swing.AvatarIcon;
 import view.form.CadastroLeituraForm;
 import view.tabbed.WindowsTabbed;
@@ -30,9 +30,9 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
     @Override
     public SimpleHeaderData getSimpleHeaderData() {
         return new SimpleHeaderData()
-                .setIcon(new AvatarIcon(getClass().getResource("/view/image/profile.png"), 60, 60, 999))
-                .setTitle("João Silva")
-                .setDescription("joaosilva@gmail.com");
+                .setIcon(new AvatarIcon(getClass().getResource("/view/image/new.png"), 60, 60, 999))
+                .setTitle("Pedro Silva")
+                .setDescription("pedro.silva326@fatec.sp.gov.br");
     }
     
     /**
@@ -68,7 +68,7 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                             WindowsTabbed.getInstance().addTab("Cadastro", new CadastroClienteForm());
                         }
                         else if(index == 1 && subIndex==2){
-                            WindowsTabbed.getInstance().addTab("Cadastro", new CadastroLeituraForm());
+                            WindowsTabbed.getInstance().addTab("Leituras", new CadastroLeituraForm());
                         }else if (index == 2) {
                             Main.main.login();
                         }

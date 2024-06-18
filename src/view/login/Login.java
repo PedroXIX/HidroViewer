@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
-import controllers.LoginDAO;
+import model.LoginDAO;
 
 public class Login extends JPanel {
 
@@ -20,7 +20,7 @@ public class Login extends JPanel {
         setLayout(new MigLayout("fill,insets 20", "[center]", "[center]"));
         txtCpf = new JTextField();
         txtPassword = new JPasswordField();
-        chRememberMe = new JCheckBox("Remember me");
+        chRememberMe = new JCheckBox("Lembrar");
         cmdLogin = new JButton("Login");
         JPanel panel = new JPanel(new MigLayout("wrap,fillx,insets 35 45 35 45", "fill,250:280"));
         panel.putClientProperty(FlatClientProperties.STYLE, ""
@@ -40,14 +40,13 @@ public class Login extends JPanel {
 
         cmdLogin.addActionListener((e) -> {
             //  Do action login here
-            LoginDAO lc = new LoginDAO();
-            lc.logar(txtCpf.getText(), String.valueOf(txtPassword.getPassword()));
+            LoginDAO.logar(txtCpf.getText(), String.valueOf(txtPassword.getPassword()));
         });
-        txtCpf.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your username or email");
-        txtPassword.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Enter your password");
+        txtCpf.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Digite seu CPF");
+        txtPassword.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, "Digite sua senha");
 
-        JLabel lbTitle = new JLabel("Welcome back!");
-        JLabel description = new JLabel("Please sign in to access your account");
+        JLabel lbTitle = new JLabel("Bem vindo de volta!");
+        JLabel description = new JLabel("Faça login para acessar sua conta");
         lbTitle.putClientProperty(FlatClientProperties.STYLE, ""
                 + "font:bold +10");
         description.putClientProperty(FlatClientProperties.STYLE, ""

@@ -5,7 +5,7 @@ import com.formdev.flatlaf.fonts.roboto.FlatRobotoFont;
 import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import java.awt.Font;
 import javax.swing.UIManager;
-import controllers.Funcionario;
+import model.Funcionario;
 import raven.drawer.Drawer;
 import view.drawer.MyDrawerBuilder;
 import view.login.Login;
@@ -45,8 +45,8 @@ public class Main extends javax.swing.JFrame {
         MyDrawerBuilder myDrawerBuilder = new MyDrawerBuilder();
         Drawer.getInstance().setDrawerBuilder(myDrawerBuilder);
         WindowsTabbed.getInstance().install(this, body);
-        //login();
-        showMainForm();
+        login();
+        //showMainForm(); //TESTE
     }
     
     /**
@@ -70,7 +70,7 @@ public class Main extends javax.swing.JFrame {
         WindowsTabbed.getInstance().showTabbed(true);
         WindowsTabbed.getInstance().removeAllTabbed();
         setContentPane(body);
-        Notifications.getInstance().show(Notifications.Type.INFO, "Olá! "+ funcionario.getNomeFuncionario());
+        Notifications.getInstance().show(Notifications.Type.INFO, "Olá! Pedro Silva ");
     }
 
     @SuppressWarnings("unchecked")

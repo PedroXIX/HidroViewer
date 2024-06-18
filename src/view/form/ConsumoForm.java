@@ -1,7 +1,7 @@
 package view.form;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import controllers.GraficosDAO;
+import model.GraficosDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
