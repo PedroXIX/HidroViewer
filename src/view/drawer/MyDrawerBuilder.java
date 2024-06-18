@@ -10,7 +10,7 @@ import raven.drawer.component.menu.SimpleMenuOption;
 import view.form.ConsumoForm;
 import view.form.CadastroClienteForm;
 import application.main.Main;
-import models.FuncionarioModel;
+import model.Funcionario;
 import raven.swing.AvatarIcon;
 import view.form.CadastroLeituraForm;
 import view.tabbed.WindowsTabbed;
@@ -21,21 +21,30 @@ import view.tabbed.WindowsTabbed;
  */
 public class MyDrawerBuilder extends SimpleDrawerBuilder {
 
-    FuncionarioModel funcionario = Main.getFuncionario();
+    Funcionario funcionario = Main.getFuncionario();
+    
+    /**
+     * Método que define a cabeçalho do menu
+     * @return - cabeçalho definido
+     */
     @Override
     public SimpleHeaderData getSimpleHeaderData() {
         return new SimpleHeaderData()
-                .setIcon(new AvatarIcon(getClass().getResource("/view/image/profile.png"), 60, 60, 999))
-                .setTitle(Main.funcionario.getNomeFuncionario())
-                .setDescription(Main.funcionario.getEmailFuncionario());
+                .setIcon(new AvatarIcon(getClass().getResource("/view/image/new.png"), 60, 60, 999))
+                .setTitle("Pedro Silva")
+                .setDescription("pedro.silva326@fatec.sp.gov.br");
     }
-
+    
+    /**
+     * Método que cria e define os itens do menu
+     * @return - menu definido
+     */
     @Override
     public SimpleMenuOption getSimpleMenuOption() {
         String menus[][] = {
             {"~PRINCIPAL~"},
             {"Consumo"},
-            {"Consultas", "Cliente", "Leitura", "Atualizar"},
+            {"Consultas", "Cliente", "Leitura"},
             {"~OUTROS~"},
             {"Logout"}};
 
@@ -59,7 +68,7 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                             WindowsTabbed.getInstance().addTab("Cadastro", new CadastroClienteForm());
                         }
                         else if(index == 1 && subIndex==2){
-                            WindowsTabbed.getInstance().addTab("Cadastro", new CadastroLeituraForm());
+                            WindowsTabbed.getInstance().addTab("Leituras", new CadastroLeituraForm());
                         }else if (index == 2) {
                             Main.main.login();
                         }
@@ -80,13 +89,21 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                 });
     }
 
+    /**
+     * Método que define o rodapé
+     * @return - rodapé que foi definido
+     */
     @Override
     public SimpleFooterData getSimpleFooterData() {
         return new SimpleFooterData()
-                .setTitle("Java Swing Drawer")
+                .setTitle("HidroViewer")
                 .setDescription("Version 1.1.0");
     }
-
+    
+    /**
+     * Método que define a largura do menu
+     * @return 
+     */
     @Override
     public int getDrawerWidth() {
         return 275;

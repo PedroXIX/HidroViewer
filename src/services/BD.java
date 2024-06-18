@@ -65,10 +65,4 @@ public class BD {
 		}
 		catch(SQLException e) {}
 	}
-	
-	public static void main(String[] args) {
-		BD bd = new BD();
-		bd.getConnection();
-		bd.close();
-	}
 }

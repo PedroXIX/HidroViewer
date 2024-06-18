@@ -1,6 +1,6 @@
 package view.form;
 
-import controllers.LeituraDAO;
+import model.LeituraDAO;
 import java.awt.Dimension;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
@@ -15,10 +15,10 @@ import services.MyTableModel;
 import view.tabbed.TabbedForm;
 import java.sql.SQLException;
 import java.sql.Date;
-import models.Leitura;
+import model.Leitura;
 
 /**
- *
+ * Classe que permite o cadastro, atualização, exclusão e consulta de registros na tabela Leitura no banco de dados.  
  * @author RAVEN
  */
 public class CadastroLeituraForm extends TabbedForm {
@@ -66,7 +66,6 @@ public class CadastroLeituraForm extends TabbedForm {
         btnNovo = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         tfLocalizar = new javax.swing.JTextField();
-        jScrollPane2 = new javax.swing.JScrollPane();
         lbCodigoHidrometro = new javax.swing.JLabel();
         tfCodigoHidrometro = new javax.swing.JTextField();
         btnBuscarHidrometro = new javax.swing.JButton();
@@ -77,17 +76,22 @@ public class CadastroLeituraForm extends TabbedForm {
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 0, 0));
-        jLabel1.setText("Crud Leituras");
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel1.setText("Leituras");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 231, -1));
 
         lbCodigoLeitura.setText("Codigo Leitura");
+        add(lbCodigoLeitura, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, -1, -1));
 
         tfCodigoLeitura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCodigoLeituraActionPerformed(evt);
             }
         });
+        add(tfCodigoLeitura, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 210, 120, -1));
 
         btnBuscarLeitura.setText("Buscar");
         btnBuscarLeitura.addActionListener(new java.awt.event.ActionListener() {
@@ -95,12 +99,19 @@ public class CadastroLeituraForm extends TabbedForm {
                 btnBuscarLeituraActionPerformed(evt);
             }
         });
+        add(btnBuscarLeitura, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 210, 87, -1));
 
         lblDataLeitura.setText("Data Leitura");
+        add(lblDataLeitura, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, -1, -1));
+        add(tfDataLeitura, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 240, -1));
 
         lblLeituraAnterior.setText("Leitura Anterior");
+        add(lblLeituraAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, -1, -1));
+        add(tfLeituraAnterior, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 221, -1));
 
         lblLeituraAtual.setText("Leitura Atual");
+        add(lblLeituraAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 380, -1, -1));
+        add(tfLeituraAtual, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 370, 221, -1));
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +119,7 @@ public class CadastroLeituraForm extends TabbedForm {
                 btnSalvarActionPerformed(evt);
             }
         });
+        add(btnSalvar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 510, -1, -1));
 
         btnNovo.setText("Novo");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
@@ -115,6 +127,7 @@ public class CadastroLeituraForm extends TabbedForm {
                 btnNovoActionPerformed(evt);
             }
         });
+        add(btnNovo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 510, -1, -1));
 
         btnExcluir.setText("Excluir");
         btnExcluir.addActionListener(new java.awt.event.ActionListener() {
@@ -122,6 +135,7 @@ public class CadastroLeituraForm extends TabbedForm {
                 btnExcluirActionPerformed(evt);
             }
         });
+        add(btnExcluir, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 510, -1, -1));
 
         tfLocalizar.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -131,14 +145,17 @@ public class CadastroLeituraForm extends TabbedForm {
                 tfLocalizarKeyReleased(evt);
             }
         });
+        add(tfLocalizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 180, 513, -1));
 
         lbCodigoHidrometro.setText("Codigo Hidrometro");
+        add(lbCodigoHidrometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, -1, -1));
 
         tfCodigoHidrometro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tfCodigoHidrometroActionPerformed(evt);
             }
         });
+        add(tfCodigoHidrometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 94, -1));
 
         btnBuscarHidrometro.setText("Buscar");
         btnBuscarHidrometro.addActionListener(new java.awt.event.ActionListener() {
@@ -146,14 +163,19 @@ public class CadastroLeituraForm extends TabbedForm {
                 btnBuscarHidrometroActionPerformed(evt);
             }
         });
+        add(btnBuscarHidrometro, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 250, 87, -1));
 
         lblConsumo.setText("Consumo");
+        add(lblConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 420, -1, -1));
 
         tfConsumo.setEnabled(false);
+        add(tfConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 251, -1));
 
         lblMediaConsumo.setText("Média Consumo");
+        add(lblMediaConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 460, -1, -1));
 
         tfMediaConsumo.setEnabled(false);
+        add(tfMediaConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 450, 215, -1));
 
         atualizarGrade();
         table.setColumnSelectionAllowed(true);
@@ -164,119 +186,7 @@ public class CadastroLeituraForm extends TabbedForm {
         });
         jScrollPane1.setViewportView(table);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(btnNovo)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnSalvar)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnExcluir))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblMediaConsumo)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tfMediaConsumo, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblConsumo)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tfConsumo))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(lblLeituraAnterior)
-                                        .addComponent(lblLeituraAtual))
-                                    .addGap(18, 18, 18)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfLeituraAnterior)
-                                        .addComponent(tfLeituraAtual)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lblDataLeitura)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(tfDataLeitura)))
-                            .addGap(8, 8, 8)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbCodigoHidrometro)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfCodigoHidrometro, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbCodigoLeitura)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfCodigoLeitura, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBuscarLeitura, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarHidrometro, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel1))
-                .addGap(141, 141, 141)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(380, 380, 380)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 16, Short.MAX_VALUE))
-                    .addComponent(tfLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 909, Short.MAX_VALUE))
-                .addContainerGap(753, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbCodigoLeitura)
-                            .addComponent(tfCodigoLeitura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarLeitura))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfCodigoHidrometro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarHidrometro)
-                            .addComponent(lbCodigoHidrometro))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDataLeitura)
-                            .addComponent(tfDataLeitura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblLeituraAnterior)
-                            .addComponent(tfLeituraAnterior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblLeituraAtual)
-                            .addComponent(tfLeituraAtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblConsumo)
-                            .addComponent(tfConsumo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblMediaConsumo)
-                            .addComponent(tfMediaConsumo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnSalvar)
-                            .addComponent(btnNovo)
-                            .addComponent(btnExcluir)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(tfLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(9, 9, 9))
-        );
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 513, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void tfCodigoLeituraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfCodigoLeituraActionPerformed
@@ -409,7 +319,6 @@ public class CadastroLeituraForm extends TabbedForm {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbCodigoHidrometro;
     private javax.swing.JLabel lbCodigoLeitura;
     private javax.swing.JLabel lblConsumo;

@@ -1,7 +1,7 @@
 package view.form;
 
 import com.formdev.flatlaf.FlatClientProperties;
-import controllers.GraficosDAO;
+import model.GraficosDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
@@ -12,14 +12,14 @@ import javax.swing.JScrollPane;
 import net.miginfocom.swing.MigLayout;
 import raven.chart.bar.HorizontalBarChart;
 import raven.chart.data.category.DefaultCategoryDataset;
-import raven.chart.data.pie.DefaultPieDataset;
 import raven.chart.line.LineChart;
 import raven.chart.pie.PieChart;
 import view.tabbed.TabbedForm;
 
 /**
+ * Painel que exibe as informações de consumo geral de acordo com a base de dados
  *
- * @author RAVEN
+ * @author Pedro
  */
 public class ConsumoForm extends TabbedForm {
 
@@ -30,9 +30,6 @@ public class ConsumoForm extends TabbedForm {
     private PieChart pieChart2;
     private PieChart pieChart3;
 
-    /**
-     * Creates new form TestForm
-     */
     public ConsumoForm() {
         initComponents();
         init();
@@ -46,13 +43,16 @@ public class ConsumoForm extends TabbedForm {
         createBarChart();
     }
 
+    /**
+     * Método que adiciona os gráficos de pizza no painel
+     */
     private void createPieChartsPanel() {
         JPanel pieChartsPanel = new JPanel(new MigLayout("fill, insets 0", "[33%][33%][33%]", "[]"));
 
-        pieChart1 = createPieChart("CONSUMO MENSAL");
+        pieChart1 = createPieChartMes("CONSUMO MENSAL");
         pieChartsPanel.add(pieChart1, "cell 0 0, grow");
 
-        pieChart2 = createPieChartEstacao("CONSUMO SAZONAL");
+        pieChart2 = createPieChartEstacao("CONSUMO SAZONAL " + GraficosDAO.anoConsumo(1));
         pieChartsPanel.add(pieChart2, "cell 1 0, grow");
 
         pieChart3 = createPieChartAno("CONSUMO ANUAL");
@@ -62,66 +62,77 @@ public class ConsumoForm extends TabbedForm {
         add(new JScrollPane(pieChartsPanel), "grow, height 290");
     }
 
-    private PieChart createPieChart(String headerText) {
+    /**
+     * Método que cria um gráfico de pizza com dados referentes ao consumo dos 5
+     * últimos meses, com base no momento atual
+     *
+     * @param headerText - cabeçalho do gráfico
+     * @return - gráfico gerado
+     */
+    private PieChart createPieChartMes(String headerText) {
         PieChart pieChart = new PieChart();
         JLabel header = new JLabel(headerText);
         header.putClientProperty(FlatClientProperties.STYLE, "font:+1");
         pieChart.setHeader(header);
         pieChart.getChartColor().addColor(
-                Color.decode("#f87171"),
-                Color.decode("#fb923c"),
-                Color.decode("#fbbf24"),
-                Color.decode("#a3e635"),
-                Color.decode("#34d399"),
-                Color.decode("#22d3ee"),
-                Color.decode("#818cf8"),
-                Color.decode("#c084fc")
-        );
+                Color.decode("#1f77b4"),
+                Color.decode("#4292c6"),
+                Color.decode("#6baed6"),
+                Color.decode("#9ecae1"),
+                Color.decode("#a9cfe9"));
         applyStyle(pieChart);
-        pieChart.setDataset(createPieData());
+        pieChart.setDataset(GraficosDAO.createDataMes());
         return pieChart;
     }
 
+    /**
+     * Método que cria um gráfico de pizza com dados referentes ao consumo dos 5
+     * últimos anos, a partir do ano anterior ao atual
+     *
+     * @param headerText - cabeçalho do gráfico
+     * @return - gráfico gerado
+     */
     private PieChart createPieChartAno(String headerText) {
         PieChart pieChart = new PieChart();
         JLabel header = new JLabel(headerText);
         header.putClientProperty(FlatClientProperties.STYLE, "font:+1");
         pieChart.setHeader(header);
         pieChart.getChartColor().addColor(
-                Color.decode("#f87171"),
-                Color.decode("#fb923c"),
-                Color.decode("#fbbf24"),
-                Color.decode("#a3e635"),
-                Color.decode("#34d399"),
-                Color.decode("#22d3ee"),
-                Color.decode("#818cf8"),
-                Color.decode("#c084fc")
-        );
+                Color.decode("#6baed6"),
+                Color.decode("#4292c6"),
+                Color.decode("#2171b5"),
+                Color.decode("#08519c"),
+                Color.decode("#08306b"));
         applyStyle(pieChart);
-        pieChart.setDataset(createPieDataAno());
+        pieChart.setDataset(GraficosDAO.createDataAno());
         return pieChart;
     }
 
+    /**
+     * Método que cria um gráfico de pizza com dados referentes ao consumo das
+     * estações últimos anos, a partir do ano anterior ao atual
+     *
+     * @param headerText - cabeçalho do gráfico
+     * @return - gráfico gerado
+     */
     private PieChart createPieChartEstacao(String headerText) {
         PieChart pieChart = new PieChart();
         JLabel header = new JLabel(headerText);
         header.putClientProperty(FlatClientProperties.STYLE, "font:+1");
         pieChart.setHeader(header);
         pieChart.getChartColor().addColor(
-                Color.decode("#f87171"),
-                Color.decode("#fb923c"),
-                Color.decode("#fbbf24"),
-                Color.decode("#a3e635"),
-                Color.decode("#34d399"),
-                Color.decode("#22d3ee"),
-                Color.decode("#818cf8"),
-                Color.decode("#c084fc")
-        );
+                Color.decode("#6baed6"),
+                Color.decode("#4292c6"),
+                Color.decode("#2171b5"),
+                Color.decode("#084594"));
         applyStyle(pieChart);
-        pieChart.setDataset(createPieDataEstacao());
+        pieChart.setDataset(GraficosDAO.createPieDataEstacao());
         return pieChart;
     }
 
+    /**
+     * Método que adiciona o gráfico de linha no painel
+     */
     private void createLineChart() {
         lineChart = new LineChart();
         lineChart.setChartType(LineChart.ChartType.CURVE);
@@ -130,14 +141,17 @@ public class ConsumoForm extends TabbedForm {
         createLineChartData();
     }
 
+    /**
+     * Método que adiciona os gráficos de barra no painel
+     */
     private void createBarChart() {
         // BarChart 1
         barChart1 = new HorizontalBarChart();
         JLabel header1 = new JLabel("Consumo Mensal");
         header1.putClientProperty(FlatClientProperties.STYLE, "font:+1; border:0,0,5,0");
         barChart1.setHeader(header1);
-        barChart1.setBarColor(Color.decode("#f97316"));
-        barChart1.setDataset(createData());
+        barChart1.setBarColor(Color.decode("#1f77b4"));
+        barChart1.setDataset(GraficosDAO.createDataMes());
         JPanel panel1 = new JPanel(new BorderLayout());
         applyStyle(panel1);
         panel1.add(barChart1);
@@ -148,83 +162,42 @@ public class ConsumoForm extends TabbedForm {
         JLabel header2 = new JLabel("Consumo Anual");
         header2.putClientProperty(FlatClientProperties.STYLE, "font:+1; border:0,0,5,0");
         barChart2.setHeader(header2);
-        barChart2.setBarColor(Color.decode("#10b981"));
-        barChart2.setDataset(createDataAno());
+        barChart2.setBarColor(Color.decode("#6baed6"));
+        barChart2.setDataset(GraficosDAO.createDataAno());
+        //barChart2.setValuesFormat(new DecimalFormat("#,#0.00"));
         JPanel panel2 = new JPanel(new BorderLayout());
         applyStyle(panel2);
         panel2.add(barChart2);
         add(new JScrollPane(panel2), "height 300");
     }
-
-    private DefaultPieDataset createData() {
-        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        dataset.addValue(GraficosDAO.mes(0) + " (Atual)", GraficosDAO.mesConsumo(0));
-        dataset.addValue(GraficosDAO.mes(1), GraficosDAO.mesConsumo(1));
-        dataset.addValue(GraficosDAO.mes(2), GraficosDAO.mesConsumo(2));
-        dataset.addValue(GraficosDAO.mes(3), GraficosDAO.mesConsumo(3));
-        dataset.addValue(GraficosDAO.mes(4), GraficosDAO.mesConsumo(4));
-        return dataset;
-    }
-
-    private DefaultPieDataset createDataAno() {
-        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        dataset.addValue(GraficosDAO.ano(1) + " (Atual)", GraficosDAO.anoConsumo(1));
-        dataset.addValue(GraficosDAO.ano(2), GraficosDAO.anoConsumo(2));
-        dataset.addValue(GraficosDAO.ano(3), GraficosDAO.anoConsumo(3));
-        dataset.addValue(GraficosDAO.ano(4), GraficosDAO.anoConsumo(4));
-        dataset.addValue(GraficosDAO.ano(5), GraficosDAO.anoConsumo(5));
-        return dataset;
-    }
-
-    private DefaultPieDataset createPieData() {
-        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        dataset.addValue(GraficosDAO.mes(0) + " (Atual)", GraficosDAO.mesConsumo(0));
-        dataset.addValue(GraficosDAO.mes(1), GraficosDAO.mesConsumo(1));
-        dataset.addValue(GraficosDAO.mes(2), GraficosDAO.mesConsumo(2));
-        dataset.addValue(GraficosDAO.mes(3), GraficosDAO.mesConsumo(3));
-        dataset.addValue(GraficosDAO.mes(4), GraficosDAO.mesConsumo(4));
-        return dataset;
-    }
-        
-
-    private DefaultPieDataset createPieDataEstacao() {
-        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        dataset.addValue("Verão", GraficosDAO.estacaoConsumo(0));
-        dataset.addValue("Outono", GraficosDAO.estacaoConsumo(1));
-        dataset.addValue("Inverno", GraficosDAO.estacaoConsumo(2));
-        dataset.addValue("Primavera", GraficosDAO.estacaoConsumo(3));
-        return dataset;
-    }
-
-    private DefaultPieDataset createPieDataAno() {
-        DefaultPieDataset<String> dataset = new DefaultPieDataset<>();
-        dataset.addValue(GraficosDAO.ano(1), GraficosDAO.anoConsumo(1));
-        dataset.addValue(GraficosDAO.ano(2), GraficosDAO.anoConsumo(2));
-        dataset.addValue(GraficosDAO.ano(3), GraficosDAO.anoConsumo(3));
-        dataset.addValue(GraficosDAO.ano(4), GraficosDAO.anoConsumo(4));
-        dataset.addValue(GraficosDAO.ano(5), GraficosDAO.anoConsumo(5));
-        return dataset;
-    }
-
+    
+      /**
+     * Método que determina os dados anuais do gráfico de linha
+     */
     private void createLineChartData() {
         DefaultCategoryDataset<String, String> categoryDataset = new DefaultCategoryDataset<>();
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat df = new SimpleDateFormat("MMM dd, yyyy");
         for (int i = GraficosDAO.qtdMes() - 1; i >= 0; i--) {
             String date = df.format(GraficosDAO.mesData(i));
-            categoryDataset.addValue(GraficosDAO.mesConsumo(i), "Consumo", date);
-            categoryDataset.addValue(GraficosDAO.mesConsumo(i,1), "2023", date);
-            categoryDataset.addValue(GraficosDAO.mesConsumo(i,2), "2024", date);
+            categoryDataset.addValue(GraficosDAO.mesConsumo(i), "Consumo(atual)", date);
+            categoryDataset.addValue(GraficosDAO.mesConsumo(i, 1), GraficosDAO.ano(1), date);
+            categoryDataset.addValue(GraficosDAO.mesConsumo(i, 2), GraficosDAO.ano(2), date);
             cal.add(Calendar.DATE, 1);
         }
 
         lineChart.setCategoryDataset(categoryDataset);
-        lineChart.getChartColor().addColor(Color.decode("#38bdf8"), Color.decode("#fb7185"), Color.decode("#34d399"));
+        lineChart.getChartColor().addColor(Color.decode("#6baed6"), Color.decode("#4292c6"), Color.decode("#2171b5"));
         JLabel header = new JLabel("Consumo ao longo dos meses");
         header.putClientProperty(FlatClientProperties.STYLE, "font:+1; border:0,0,5,0");
         lineChart.setHeader(header);
     }
 
+    /**
+     * Método que aplica os padrões de formatação a um objeto JPanel
+     *
+     * @param panel - objeto que será formatado
+     */
     private void applyStyle(JPanel panel) {
         panel.putClientProperty(FlatClientProperties.STYLE, ""
                 + "border:5,5,5,5,$Component.borderColor;"
@@ -233,14 +206,15 @@ public class ConsumoForm extends TabbedForm {
                 + "foreground:$Component.foreground"
         );
         for (var component : panel.getComponents()) {
-            if (component instanceof JLabel) {
-                ((JLabel) component).putClientProperty(FlatClientProperties.STYLE, ""
+            if (component instanceof JLabel jLabel) {
+                jLabel.putClientProperty(FlatClientProperties.STYLE, ""
                         + "font:+1;"
                         + "foreground:$Component.foreground;");
             }
         }
     }
 
+    @Override
     public void formOpen() {
         System.out.println("Form open");
         lineChart.startAnimation();

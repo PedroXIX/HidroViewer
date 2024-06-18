@@ -4,7 +4,7 @@
  */
 package testes;
 
-import controllers.ClienteDAO;
+import model.ClienteDAO;
 
 /**
  *
