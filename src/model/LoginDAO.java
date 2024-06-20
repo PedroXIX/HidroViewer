@@ -17,7 +17,12 @@ import services.BD;
 public class LoginDAO {
     private static String sql, men;
     private static BD bd = new BD();
-     
+    
+    /**
+     * Método que faz a autenticação por meio do CPF e senha
+     * @param cpf - cpf do usuário
+     * @param senha - senha do usuário
+     */
     public static void logar(String cpf, String senha){
 		if (bd.getConnection()) {
 			sql = "select*from FUNCIONARIO where CPF_FUNCIONARIO like ?";

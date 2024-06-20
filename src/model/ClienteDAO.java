@@ -64,8 +64,8 @@ public class ClienteDAO {
             bd.st = bd.con.prepareStatement(sql);
             bd.st.setInt(5,cliente.getCodCliente());
             bd.st.setString(1,cliente.getCpfCliente());
-            bd.st.setString(2,cliente.getEmailCliente());
-            bd.st.setString(3,cliente.getNomeCliente());
+            bd.st.setString(2,cliente.getNomeCliente());
+            bd.st.setString(3,cliente.getEmailCliente());
             bd.st.setString(4,cliente.getTelefoneCliente());
             bd.st.executeUpdate();
             men = "Cliente com código " + cliente.getCodCliente() + " atualizado com sucesso!";

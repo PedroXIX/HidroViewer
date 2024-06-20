@@ -52,7 +52,7 @@ public class ConsumoForm extends TabbedForm {
         pieChart1 = createPieChartMes("CONSUMO MENSAL");
         pieChartsPanel.add(pieChart1, "cell 0 0, grow");
 
-        pieChart2 = createPieChartEstacao("CONSUMO SAZONAL " + GraficosDAO.anoConsumo(1));
+        pieChart2 = createPieChartEstacao("CONSUMO SAZONAL " + GraficosDAO.ano(1));
         pieChartsPanel.add(pieChart2, "cell 1 0, grow");
 
         pieChart3 = createPieChartAno("CONSUMO ANUAL");
