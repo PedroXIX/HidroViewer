@@ -10,6 +10,10 @@ import javax.swing.JTextField;
 import net.miginfocom.swing.MigLayout;
 import model.LoginDAO;
 
+/**
+ * Classe responsável por fornecer o método relativo ao ato de logar no sistema
+ * @author Pedro
+ */
 public class Login extends JPanel {
 
     public Login() {

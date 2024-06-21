@@ -5,7 +5,7 @@
 package model;
 
 /**
- *
+ * Classe responsável por realizar interações com o banco de dados referente a entidade Funcionario
  * @author Pedro
  */
 public class Funcionario {
