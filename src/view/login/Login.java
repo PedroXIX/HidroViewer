@@ -11,7 +11,7 @@ import net.miginfocom.swing.MigLayout;
 import model.LoginDAO;
 
 /**
- * Classe responsável por fornecer o método relativo ao ato de logar no sistema
+ * Classe que oferece uma interface, que será utilizada pelo usuário para fazer login 
  * @author Pedro
  */
 public class Login extends JPanel {

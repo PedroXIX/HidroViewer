@@ -11,7 +11,7 @@ import raven.popup.component.PopupController;
 import services.BD;
 
 /**
- *
+ * Classe responsável por fornecer o método relativo ao ato de logar no sistema
  * @author Pedro
  */
 public class LoginDAO {
